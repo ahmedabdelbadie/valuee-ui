@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ErrorBoundary } from "react-error-boundary";
-
+import { ProSidebarProvider } from "react-pro-sidebar";
 import { BrowserRouter as Router } from "react-router-dom";
 
 const ErrorFallback = () => {
@@ -30,15 +30,17 @@ export const AppProvider = ({ children }) => {
       }
     >
       <ErrorBoundary FallbackComponent={ErrorFallback}>
-        {/* <HelmetProvider> */}
-        {/* <QueryClientProvider client={queryClient}>
+        <ProSidebarProvider>
+          {/* <HelmetProvider> */}
+          {/* <QueryClientProvider client={queryClient}>
             {process.env.NODE_ENV !== "test" && <ReactQueryDevtools />} */}
-        {/* <Notifications /> */}
-        {/* <AuthProvider> */}
-        <Router>{children}</Router>
-        {/* </AuthProvider> */}
-        {/* </QueryClientProvider> */}
-        {/* </HelmetProvider> */}
+          {/* <Notifications /> */}
+          {/* <AuthProvider> */}
+          <Router>{children}</Router>
+          {/* </AuthProvider> */}
+          {/* </QueryClientProvider> */}
+          {/* </HelmetProvider> */}
+        </ProSidebarProvider>
       </ErrorBoundary>
     </React.Suspense>
   );

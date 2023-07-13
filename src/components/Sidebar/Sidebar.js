@@ -18,7 +18,7 @@ const Organizatoinicon = () => {
   );
 };
 const SidebarComponent = () => {
-  const { collapseSidebar } = useProSidebar();
+  const { collapseSidebar } = useProSidebar(false);
   return (
     <Sidebar style={{ height: "100vh" }}>
       <Menu>
@@ -30,15 +30,10 @@ const SidebarComponent = () => {
           style={{ textAlign: "center" }}
         >
           {" "}
-          <h2>ahmed</h2>
+          <h2>Value Plus</h2>
         </MenuItem>
 
         <MenuItem icon={<Organizatoinicon />}>Organization</MenuItem>
-        <MenuItem icon={<PeopleOutlinedIcon />}>Team</MenuItem>
-        <MenuItem icon={<ContactsOutlinedIcon />}>Contacts</MenuItem>
-        <MenuItem icon={<ReceiptOutlinedIcon />}>Profile</MenuItem>
-        <MenuItem icon={<HelpOutlineOutlinedIcon />}>FAQ</MenuItem>
-        <MenuItem icon={<CalendarTodayOutlinedIcon />}>Calendar</MenuItem>
       </Menu>
     </Sidebar>
   );
