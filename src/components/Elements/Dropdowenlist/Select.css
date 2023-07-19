@@ -1,0 +1,20 @@
+.control-icon {
+  display: flex;
+  align-items: center;
+  color: inherit;
+}
+
+
+.react-select__control:focus {
+  outline-color: #00a1e0;
+  box-shadow: 0 0 0 2px #00a1e0;
+}
+
+
+.react-select__control {
+  border-color: #ccc;
+}
+
+.react-select__control--error {
+  border-color: #e74c3c;
+}

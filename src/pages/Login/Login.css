@@ -1,0 +1,16 @@
+.input-animation input {
+    border: 1px solid #ccc;
+    padding: 10px;
+    transition: border-color 0.3s ease-in-out;
+  }
+  
+  .input-animation input:focus {
+    outline: none;
+    border-color: #f0f0f0;
+    box-shadow: 0 0 5px #f0f0f0;
+  }
+  
+  .input-animation input:focus::placeholder {
+    color: #f0f0f0;
+  }
+  

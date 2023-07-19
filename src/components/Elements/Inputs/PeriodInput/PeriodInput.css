@@ -1,0 +1,30 @@
+.periodInput {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+  
+  .selectDateInput {
+    padding: 8px;
+    border: 1px solid #888888;
+    border-radius: 4px;
+    outline: none;
+    background-color: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .selectDateInput:focus {
+    border-color: #888888;
+    background-color: #f0f0f0;
+  }
+  
+  .selectDateIcon {
+    color: #888888;
+    margin-right: 8px;
+  }
+  
+  .selectDateFocused {
+    background-color: #f0f0f0;
+  }
+  
