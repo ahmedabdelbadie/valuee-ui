@@ -1,5 +1,7 @@
+import { Typography } from "@mui/material";
+
 const Organizaton = () => {
-  return <h1>Organizaton</h1>;
+  return <Typography variant="h2">Organizaton</Typography>;
 };
 
 export default Organizaton;
