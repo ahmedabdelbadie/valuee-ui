@@ -1,11 +1,19 @@
-import { Sidebar, Menu, MenuItem, useProSidebar } from "react-pro-sidebar";
-import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
-import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
-import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
-import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
-import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
-import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
+import {
+  Link,
+  Drawer,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Divider,
+  IconButton,
+} from "@mui/material";
+
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import { useSelector, useDispatch } from "react-redux";
+
+import { toggleOpen } from "../../redux/Slices/Sidebar";
+import { styled, useTheme } from "@mui/material/styles";
 
 const Organizatoinicon = () => {
   return (
@@ -17,25 +25,54 @@ const Organizatoinicon = () => {
     ></img>
   );
 };
-const SidebarComponent = () => {
-  const { collapseSidebar } = useProSidebar(false);
-  return (
-    <Sidebar style={{ height: "100vh" }}>
-      <Menu>
-        <MenuItem
-          icon={<MenuOutlinedIcon />}
-          onClick={() => {
-            collapseSidebar();
-          }}
-          style={{ textAlign: "center" }}
-        >
-          {" "}
-          <h2>Value Plus</h2>
-        </MenuItem>
+const SidebarComponent = (prop) => {
+  const theme = useTheme();
+  const DrawerHeader = styled("div")(({ theme }) => ({
+    display: "flex",
+    alignItems: "center",
+    padding: theme.spacing(0, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+    justifyContent: "flex-end",
+  }));
+  const { isOpen, drawerWidth } = useSelector((state) => state.sidebar);
 
-        <MenuItem icon={<Organizatoinicon />}>Organization</MenuItem>
-      </Menu>
-    </Sidebar>
+  const dispatch = useDispatch();
+  const handleToggle = () => {
+    dispatch(toggleOpen());
+  };
+  //const [open, setOpen] = useState(true);
+  return (
+    <Drawer
+      open={isOpen}
+      anchor={"left"}
+      sx={{
+        width: drawerWidth,
+        flexShrink: 0,
+        "& .MuiDrawer-paper": {
+          width: drawerWidth,
+          boxSizing: "border-box",
+        },
+      }}
+      variant="persistent"
+    >
+      <DrawerHeader>
+        <IconButton onClick={handleToggle}>
+          {theme.direction === "ltr" ? (
+            <ChevronLeftIcon />
+          ) : (
+            <ChevronRightIcon />
+          )}
+        </IconButton>
+      </DrawerHeader>
+      <Divider />
+      <ListItem key={1}>
+        <ListItemIcon>
+          <Organizatoinicon />
+        </ListItemIcon>
+        <ListItemText primary="Organization" />
+      </ListItem>
+    </Drawer>
   );
 };
 export default SidebarComponent;
