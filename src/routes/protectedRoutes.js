@@ -2,8 +2,12 @@ import { Suspense, lazy } from "react";
 import { Outlet } from "react-router-dom";
 
 import MainLayout from "../layout/MainLayout";
-
-const Dashboard = lazy(() => import("../pages/Dashboard"), "Dashboard");
+import React from "react";
+import { Container } from "@mui/material";
+const Dashboard = lazy(
+  () => import("../pages/Dashboard/Dashboard"),
+  "Dashboard"
+);
 const GL = lazy(() => import("../pages/General-ledger/General-ledger"), "GL");
 const Organization = lazy(
   () => import("../pages/Organization/Organization"),
@@ -14,11 +18,11 @@ console.log(Dashboard);
 
 const App = () => {
   return (
-    <MainLayout>
-      <Suspense fallback="Loading...">
-        <Outlet />
-      </Suspense>
-    </MainLayout>
+    <React.Fragment>
+      <Container disableGutters={true} maxWidth={"xl"}>
+        <MainLayout />
+      </Container>
+    </React.Fragment>
   );
 };
 
@@ -28,7 +32,7 @@ export const protectedRoutes = [
     element: <App />,
     children: [
       { path: "general-ledger", element: <GL /> },
-      { path: "orgnization", element: <Organization /> },
+      { path: "organization", element: <Organization /> },
       { path: "*", element: <Dashboard /> },
     ],
   },

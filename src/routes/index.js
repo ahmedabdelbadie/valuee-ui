@@ -5,7 +5,8 @@ import { useRoutes } from "react-router-dom";
 
 import { protectedRoutes } from "./protectedRoutes";
 // import { publicRoutes } from "./publicRoutes";
-
+import React from "react";
+import { Container } from "@mui/material";
 export const AppRoutes = () => {
   //   const auth = useAuth();
 
@@ -16,4 +17,5 @@ export const AppRoutes = () => {
   const element = useRoutes([...routes]);
 
   return <>{element}</>;
+  //  <>{element}</>;
 };

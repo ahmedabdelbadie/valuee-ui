@@ -1,8 +1,11 @@
 import * as React from "react";
 import { ErrorBoundary } from "react-error-boundary";
-import { ProSidebarProvider } from "react-pro-sidebar";
-import { BrowserRouter as Router } from "react-router-dom";
 
+import { BrowserRouter as Router } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "redux/Store";
+import { useTheme } from "@mui/material";
+// import { ThemeProvider } from "@mui/material";
 const ErrorFallback = () => {
   return (
     <div
@@ -21,16 +24,20 @@ const ErrorFallback = () => {
 };
 
 export const AppProvider = ({ children }) => {
+  const thene = useTheme();
+
+  console.log(thene);
   return (
-    <React.Suspense
-      fallback={
-        <div className="flex items-center justify-center w-screen h-screen">
-          {/* <Spinner size="xl" /> */}
-        </div>
-      }
-    >
-      <ErrorBoundary FallbackComponent={ErrorFallback}>
-        <ProSidebarProvider>
+    <Provider store={store}>
+      {/* <ThemeProvider> */}
+      <React.Suspense
+        fallback={
+          <div className="flex items-center justify-center w-screen h-screen">
+            {/* <Spinner size="xl" /> */}
+          </div>
+        }
+      >
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
           {/* <HelmetProvider> */}
           {/* <QueryClientProvider client={queryClient}>
             {process.env.NODE_ENV !== "test" && <ReactQueryDevtools />} */}
@@ -40,8 +47,9 @@ export const AppProvider = ({ children }) => {
           {/* </AuthProvider> */}
           {/* </QueryClientProvider> */}
           {/* </HelmetProvider> */}
-        </ProSidebarProvider>
-      </ErrorBoundary>
-    </React.Suspense>
+        </ErrorBoundary>
+      </React.Suspense>
+      {/* </ThemeProvider> */}
+    </Provider>
   );
 };
