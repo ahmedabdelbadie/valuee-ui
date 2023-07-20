@@ -1,6 +1,8 @@
 import {
   Link,
+  ListItemButton,
   Drawer,
+  List,
   ListItem,
   ListItemIcon,
   ListItemText,
@@ -13,25 +15,38 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { useSelector, useDispatch } from "react-redux";
 
 import { toggleOpen } from "../../redux/Slices/Sidebar";
-import { styled, useTheme } from "@mui/material/styles";
-
-const Organizatoinicon = () => {
-  return (
-    <img
-      className="dxnb-img dx-vam"
-      src="https://fmscodemo.valueplus1.com//DXX.axd?handlerName=ImageResource&name=Home_32x32&enbl=True&fldr=TemplatesV2Images&v=7254e882df0427f86f32eedb72746728"
-      alt=""
-      style={{ height: "32px", width: "32px" }}
-    ></img>
-  );
+import {
+  styled,
+  useTheme,
+  ThemeProvider,
+  createTheme,
+} from "@mui/material/styles";
+import sidebarData from "../../Services/Static/sidebardata";
+import { Analytics as AnalyticsIcon } from "@mui/icons-material";
+import HomeIcon from "@mui/icons-material/Home";
+const getIcon = (name) => {
+  switch (name) {
+    case "ORGANIZATION":
+      return <HomeIcon />;
+    case "GENERAL LEDGER":
+      return <AnalyticsIcon />;
+    default:
+      return <HomeIcon />;
+  }
 };
+const sidetheme = createTheme({
+  components: {
+    MUIListItemText: { styleOverrides: { color: "#000" } },
+  },
+});
+
+//`'Inter', sans-serif`
 const SidebarComponent = (prop) => {
   const theme = useTheme();
   const DrawerHeader = styled("div")(({ theme }) => ({
     display: "flex",
     alignItems: "center",
     padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
     ...theme.mixins.toolbar,
     justifyContent: "flex-end",
   }));
@@ -41,7 +56,6 @@ const SidebarComponent = (prop) => {
   const handleToggle = () => {
     dispatch(toggleOpen());
   };
-  //const [open, setOpen] = useState(true);
   return (
     <Drawer
       open={isOpen}
@@ -56,7 +70,7 @@ const SidebarComponent = (prop) => {
       }}
       variant="persistent"
     >
-      <DrawerHeader>
+      <DrawerHeader sx={{ backgroundColor: "#3e4676" }}>
         <IconButton onClick={handleToggle}>
           {theme.direction === "ltr" ? (
             <ChevronLeftIcon />
@@ -66,12 +80,24 @@ const SidebarComponent = (prop) => {
         </IconButton>
       </DrawerHeader>
       <Divider />
-      <ListItem key={1}>
-        <ListItemIcon>
-          <Organizatoinicon />
-        </ListItemIcon>
-        <ListItemText primary="Organization" />
-      </ListItem>
+      <ThemeProvider theme={sidetheme}>
+        <List>
+          {sidebarData().map((item, index) => (
+            <ListItem key={item.name} disablePadding>
+              <Link
+                href={item.name.toLowerCase().replace(" ", "-")}
+                sx={{ textDecoration: "none" }}
+              >
+                <ListItemButton>
+                  <ListItemIcon>{getIcon(item.name)}</ListItemIcon>
+                  <ListItemText primary={item.name} />
+                </ListItemButton>
+              </Link>
+            </ListItem>
+          ))}
+        </List>
+        <Divider />
+      </ThemeProvider>
     </Drawer>
   );
 };
