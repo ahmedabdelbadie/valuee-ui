@@ -83,9 +83,10 @@ const Select = (props) => {
 
             <ReactSelect {...inputProps} onChange={(e) => changeHandler(e, props)} onFocus={handleSelectFocus} className={isError ? 'react-select-error' : ''} />
             {props.errorMsg && isInteracted && (
-                <span className="text-danger">
+                <span className="text-danger" style={{ color: 'red' }}>
                     {props.errorMsg === true ? `Please select ${props.title}.` : props.errorMsg}
                 </span>
+
             )}
         </div>
     );

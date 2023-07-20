@@ -6,38 +6,45 @@ import { AccountCircle, ExitToApp } from "@mui/icons-material";
 const UserMenu = () => {
     const [isMenuOpen, setMenuOpen] = useState(false);
 
-    const handleMenuToggle = () => {
+    const handleUserToggle = () => {
         setMenuOpen(!isMenuOpen);
     };
 
-    const handleMenuClose = () => {
+    const handleUserClose = () => {
         setMenuOpen(false);
     };
 
     return (
         <>
-            <IconButton color="inherit" onClick={handleMenuToggle}>
+            <IconButton color="inherit" onClick={handleUserToggle}>
                 <AccountCircle />
             </IconButton>
+
+
             <Menu
                 anchorEl={isMenuOpen}
                 open={isMenuOpen}
-                onClose={handleMenuClose}
+                onClose={handleUserClose}
                 anchorOrigin={{ vertical: "top", horizontal: "right" }}
                 transformOrigin={{ vertical: "top", horizontal: "right" }}
                 sx={{ marginTop: "40px" }} // Add the margin directly to the Menu
             >
-                <MenuItem onClick={handleMenuClose}>
+
+
+
+                <MenuItem onClick={handleUserClose}>
                     <AccountCircle sx={{ marginRight: 1 }} />
                     Profile
                 </MenuItem>
-                <MenuItem onClick={handleMenuClose}>
+                <MenuItem onClick={handleUserClose}>
                     <ExitToApp sx={{ marginRight: 1 }} />
                     Logout
                 </MenuItem>
             </Menu>
+
         </>
     );
 };
+
 
 export default UserMenu;
