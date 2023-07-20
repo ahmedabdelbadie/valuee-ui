@@ -7,8 +7,8 @@ import { Outlet } from "react-router-dom";
 
 import CssBaseline from "@mui/material/CssBaseline";
 import React from "react";
-import { toggleOpen } from "../redux/Slices/Sidebar";
-import { useDispatch, useSelector } from "react-redux";
+
+import { useSelector } from "react-redux";
 import { Box } from "@mui/material";
 const Mainlayout = () => {
   const { isOpen, drawerWidth } = useSelector((state) => state.sidebar);
@@ -20,10 +20,7 @@ const Mainlayout = () => {
     ...theme.mixins.toolbar,
     justifyContent: "flex-end",
   }));
-  const dispatch = useDispatch();
-  const handleToggle = () => {
-    dispatch(toggleOpen());
-  };
+
   const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
     ({ theme, open }) => ({
       flexGrow: 1,
