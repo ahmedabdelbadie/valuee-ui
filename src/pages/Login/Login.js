@@ -1,53 +1,58 @@
 import React, { useState, useCallback } from 'react';
-import { TextField, Button, FormControlLabel, Checkbox, Card, CardContent, CardActions, } from '@material-ui/core';
+import { TextField, Button, FormControlLabel, Checkbox, Card, CardContent, CardActions } from '@material-ui/core';
 import { AccountCircle, LockOutlined } from '@material-ui/icons';
 import PeriodInput from '../../components/Elements/Inputs/PeriodInput/PeriodInput';
 import { companyOptions, branchOptions, languageOptions } from '../../Services/Static/selectOptions';
 import Select from '../../components/Elements/Dropdowenlist/Select';
 import { loginRequest, getTokenRequest } from '../../Services/utils/Api';
-import { makeStyles } from '@material-ui/core/styles';
+import styled from 'styled-components';
 
+const Container = styled("div")(({ theme }) => ({
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100vh",
+    backgroundColor: "#f0f0f0",
+}));
 
-
-
-
-const useStyles = makeStyles((theme) => ({
-    container: {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100vh',
-        backgroundColor: '#f0f0f0',
-    },
-    card: {
-        width: '50%',
-        maxWidth: '500px',
-        [theme.breakpoints.down('sm')]: {
-            width: '90%',
-        },
-    },
-    cardContent: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-    },
-    actions: {
-        justifyContent: 'center',
-    },
-    formControl: {
-        marginTop: theme.spacing(2),
-        marginBottom: theme.spacing(2),
-    },
-    radioGroup: {
-        flexDirection: 'row', // Show radio buttons in a row
+const CardContainer = styled("div")(({ theme }) => ({
+    width: "50%",
+    maxWidth: "500px",
+    "@media (max-width: 600px)": {
+        width: "90%",
     },
 }));
 
+const CardContentWrapper = styled("div")(({ theme }) => ({
+    width: "100%",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+}));
 
+const TextFieldWrapper = styled("div")(({ theme }) => ({
+    marginBottom: "1rem",
+    width: "100%",
+
+}));
+
+const ErrorMessage = styled("div")(({ theme }) => ({
+    color: "red",
+}));
+
+const CardActionsStyled = styled(CardActions)(({ theme }) => ({
+    color: "red",
+    justifyContent: "center",
+}));
+
+const FormWrapper = styled.div`
+  width: 90%; 
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+`;
 
 const Login = () => {
-
-    const classes = useStyles(); // Apply the custom styles
 
     const [form, setForm] = useState({
         username: '',
@@ -86,8 +91,6 @@ const Login = () => {
         },
     });
 
-
-
     const onValidate = (value, name) => {
         setError((prev) => ({
             ...prev,
@@ -102,7 +105,6 @@ const Login = () => {
         }));
 
         onValidate('', name);
-
     }, []);
 
     const validateForm = () => {
@@ -114,14 +116,11 @@ const Login = () => {
             } else if (errObj.isReq && !form[x]) {
                 isInvalid = true;
                 onValidate(true, x);
-
             }
         });
 
         return !isInvalid;
     };
-
-
 
     // Handle the login process
     const handleLogin = async (formData) => {
@@ -134,14 +133,10 @@ const Login = () => {
             console.log(tokenDescription);
 
             // Save the token and token description in local storage
-            localStorage.setItem("userToken", token);
-            localStorage.setItem("tokenDescription", JSON.stringify(tokenDescription));
-
-        } catch (error) {
-        }
+            localStorage.setItem('userToken', token);
+            localStorage.setItem('tokenDescription', JSON.stringify(tokenDescription));
+        } catch (error) { }
     };
-
-
 
     // Handle the form submission
     const handleSubmit = async (event) => {
@@ -155,7 +150,6 @@ const Login = () => {
 
         console.log('Data:', { ...form });
 
-
         try {
             await handleLogin(form);
         } catch (error) {
@@ -163,136 +157,114 @@ const Login = () => {
         }
     };
 
-
     return (
-        <div className={classes.container}>
-            <Card className={classes.card}>
-                <CardContent className={classes.cardContent}>
-                    <h1 className="text-center">Login</h1>
-                    <div className="form mb-3 d-flex flex-column">
+        <Container>
+            <CardContainer>
+                <Card>
+                    <CardContentWrapper>
+                        <h1 className="text-center">Login</h1>
+                        <FormWrapper >
+                            <Select
+                                name="company"
+                                title="company"
+                                value={form.company}
+                                options={companyOptions}
+                                onChangeFunc={onHandleChange}
+                                {...error.company}
+                            />
+                            <Select
+                                name="branch"
+                                title="Branch"
+                                value={form.branch}
+                                options={branchOptions}
+                                onChangeFunc={onHandleChange}
+                                {...error.branch}
+                            />
 
+                            <PeriodInput
+                                name="period"
+                                title="Period"
+                                value={form.period}
+                                onChangeFunc={onHandleChange}
+                                isReq={true}
+                                onValidateFunc={onValidate}
+                                placeholderText="Select a date"
+                                {...error.period}
+                            />
 
-                        <Select
-                            name="company"
-                            title="company"
-                            value={form.company}
-                            options={companyOptions}
-                            onChangeFunc={onHandleChange}
-                            {...error.company}
-                        />
-                        <Select
-                            name="branch"
-                            title="Branch"
-                            value={form.branch}
-                            options={branchOptions}
-                            onChangeFunc={onHandleChange}
-                            {...error.branch}
-                        />
-
-
-                        <PeriodInput
-                            name="period"
-                            title="Period"
-                            value={form.period}
-                            onChangeFunc={onHandleChange}
-                            isReq={true}
-                            onValidateFunc={onValidate}
-                            placeholderText="Select a date"
-                            {...error.period}
-                        />
-
-
-                        <TextField
-                            className="mb-3"
-                            name="username"
-                            placeholder="Username"
-                            value={form.username}
-                            onChange={(e) => onHandleChange(e.target.value, 'username')}
-                            error={!!error.username.errorMsg}
-                            required
-                            InputProps={{
-                                startAdornment: (
-                                    <div style={{ marginRight: '8px' }}>
-                                        <AccountCircle />
-                                    </div>
-                                ),
-                                style: { fontSize: '16px', color: 'black' },
-                            }}
-                            variant="outlined"
-                            fullWidth
-                            helperText={error.username.errorMsg}
-                        />
-
-                        {error.username.errorMsg && (
-                            <span style={{ color: 'red' }}>Please enter a username</span>)}
-
-
-
-
-
-                        <TextField
-                            className="mb-3"
-                            name="password"
-                            placeholder="Password"
-                            value={form.password}
-                            onChange={(e) => onHandleChange(e.target.value, 'password')}
-                            error={!!error.password.errorMsg}
-                            required
-                            type="password"
-                            InputProps={{
-                                startAdornment: (
-                                    <div style={{ marginRight: '8px' }}>
-                                        <LockOutlined />
-                                    </div>
-                                ),
-                                style: { fontSize: '16px', color: 'black' },
-                            }}
-                            variant="outlined"
-                            fullWidth
-                            helperText={error.password.errorMsg}
-                        />
-                        {error.password.errorMsg && (
-                            <span style={{ color: 'red' }}>Please enter password</span>)}
-
-
-
-
-                        <Select
-                            name="lang"
-                            title="Language"
-                            value={form.lang}
-                            options={languageOptions}
-                            onChangeFunc={onHandleChange}
-                            {...error.lang}
-                        />
-
-
-                        <FormControlLabel
-                            control={
-                                <Checkbox
-                                    checked={form.rememberPassword}
-                                    onChange={(e) => onHandleChange(e.target.checked, 'rememberPassword')}
-                                    name="rememberPassword"
-                                    color="primary"
+                            <TextFieldWrapper>
+                                <TextField
+                                    className="mb-3"
+                                    name="username"
+                                    placeholder="Username"
+                                    value={form.username}
+                                    onChange={(e) => onHandleChange(e.target.value, 'username')}
+                                    error={!!error.username.errorMsg}
+                                    required
+                                    InputProps={{
+                                        startAdornment: (
+                                            <div style={{ marginRight: '8px' }}>
+                                                <AccountCircle />
+                                            </div>
+                                        ),
+                                        style: { fontSize: '16px', color: 'black' },
+                                    }}
+                                    variant="outlined"
+                                    fullWidth
+                                    helperText={error.username.errorMsg}
                                 />
-                            }
-                            label="Remember Password"
-                        />
+                                {error.username.errorMsg && <ErrorMessage>Please enter a username</ErrorMessage>}
+                            </TextFieldWrapper>
 
+                            <TextFieldWrapper>
+                                <TextField
+                                    className="mb-3"
+                                    name="password"
+                                    placeholder="Password"
+                                    value={form.password}
+                                    onChange={(e) => onHandleChange(e.target.value, 'password')}
+                                    error={!!error.password.errorMsg}
+                                    required
+                                    type="password"
+                                    InputProps={{
+                                        startAdornment: (
+                                            <div style={{ marginRight: '8px' }}>
+                                                <LockOutlined />
+                                            </div>
+                                        ),
+                                        style: { fontSize: '16px', color: 'black' },
+                                    }}
+                                    variant="outlined"
+                                    fullWidth
+                                    helperText={error.password.errorMsg}
+                                />
+                                {error.password.errorMsg && <ErrorMessage>Please enter password</ErrorMessage>}
+                            </TextFieldWrapper>
 
+                            <Select name="lang" title="Language" value={form.lang} options={languageOptions} onChangeFunc={onHandleChange} {...error.lang} />
 
-                    </div>
-                </CardContent>
-                <CardActions className={classes.actions}>
-                    <Button variant="contained" color="primary" onClick={handleSubmit}>
-                        Submit
-                    </Button>
-                </CardActions>
-            </Card>
-        </div>
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        checked={form.rememberPassword}
+                                        onChange={(e) => onHandleChange(e.target.checked, 'rememberPassword')}
+                                        name="rememberPassword"
+                                        color="primary"
+                                    />
+                                }
+                                label="Remember Password"
+                            />
+                        </FormWrapper>
+                    </CardContentWrapper>
+                    <CardActionsStyled> {/* Using the styled CardActions here */}
+                        <Button variant="contained" color="primary" onClick={handleSubmit}>
+                            Submit
+                        </Button>
+                    </CardActionsStyled>
+                </Card>
+            </CardContainer>
+        </Container>
     );
 };
-
-
 
 export default Login;
