@@ -15,12 +15,7 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { useSelector, useDispatch } from "react-redux";
 
 import { toggleOpen } from "../../redux/Slices/Sidebar";
-import {
-  styled,
-  useTheme,
-  ThemeProvider,
-  createTheme,
-} from "@mui/material/styles";
+import { styled, useTheme } from "@mui/material/styles";
 import sidebarData from "../../Services/Static/sidebardata";
 import { Analytics as AnalyticsIcon } from "@mui/icons-material";
 import HomeIcon from "@mui/icons-material/Home";
@@ -34,13 +29,7 @@ const getIcon = (name) => {
       return <HomeIcon />;
   }
 };
-const sidetheme = createTheme({
-  components: {
-    MUIListItemText: { styleOverrides: { color: "#000" } },
-  },
-});
 
-//`'Inter', sans-serif`
 const SidebarComponent = (prop) => {
   const theme = useTheme();
   const DrawerHeader = styled("div")(({ theme }) => ({
@@ -63,6 +52,7 @@ const SidebarComponent = (prop) => {
       sx={{
         width: drawerWidth,
         flexShrink: 0,
+
         "& .MuiDrawer-paper": {
           width: drawerWidth,
           boxSizing: "border-box",
@@ -70,7 +60,7 @@ const SidebarComponent = (prop) => {
       }}
       variant="persistent"
     >
-      <DrawerHeader sx={{ backgroundColor: "#3e4676" }}>
+      <DrawerHeader>
         <IconButton onClick={handleToggle}>
           {theme.direction === "ltr" ? (
             <ChevronLeftIcon />
@@ -80,24 +70,23 @@ const SidebarComponent = (prop) => {
         </IconButton>
       </DrawerHeader>
       <Divider />
-      <ThemeProvider theme={sidetheme}>
-        <List>
-          {sidebarData().map((item, index) => (
-            <ListItem key={item.name} disablePadding>
-              <Link
-                href={item.name.toLowerCase().replace(" ", "-")}
-                sx={{ textDecoration: "none" }}
-              >
-                <ListItemButton>
-                  <ListItemIcon>{getIcon(item.name)}</ListItemIcon>
-                  <ListItemText primary={item.name} />
-                </ListItemButton>
-              </Link>
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-      </ThemeProvider>
+
+      <List>
+        {sidebarData().map((item, index) => (
+          <ListItem key={item.name} disablePadding>
+            <Link
+              href={item.name.toLowerCase().replace(" ", "-")}
+              sx={{ textDecoration: "none" }}
+            >
+              <ListItemButton>
+                <ListItemIcon>{getIcon(item.name)}</ListItemIcon>
+                <ListItemText primary={item.name.toLowerCase()} />
+              </ListItemButton>
+            </Link>
+          </ListItem>
+        ))}
+      </List>
+      <Divider />
     </Drawer>
   );
 };
