@@ -1,19 +1,13 @@
 import React, { useState, useCallback } from 'react';
-import {
-    TextField,
-    Button,
-    FormControlLabel,
-    Checkbox,
-    Card,
-    CardContent,
-    CardActions,
-} from '@material-ui/core';
+import { TextField, Button, FormControlLabel, Checkbox, Card, CardContent, CardActions, } from '@material-ui/core';
 import { AccountCircle, LockOutlined } from '@material-ui/icons';
 import PeriodInput from '../../components/Elements/Inputs/PeriodInput/PeriodInput';
-import { companyOptions, branchOptions, languageOptions } from './selectOptions';
+import { companyOptions, branchOptions, languageOptions } from '../../Services/Static/selectOptions';
 import Select from '../../components/Elements/Dropdowenlist/Select';
 import { loginRequest, getTokenRequest } from '../../Services/utils/Api';
 import { makeStyles } from '@material-ui/core/styles';
+
+
 
 
 
@@ -23,10 +17,11 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'center',
         alignItems: 'center',
         height: '100vh',
-        backgroundColor: '#f0f0f0', // Background color
+        backgroundColor: '#f0f0f0',
     },
     card: {
-        width: '40%',
+        width: '50%',
+        maxWidth: '500px',
         [theme.breakpoints.down('sm')]: {
             width: '90%',
         },
@@ -40,8 +35,8 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'center',
     },
     formControl: {
-        marginTop: theme.spacing(1),
-        marginBottom: theme.spacing(1),
+        marginTop: theme.spacing(2),
+        marginBottom: theme.spacing(2),
     },
     radioGroup: {
         flexDirection: 'row', // Show radio buttons in a row
@@ -128,7 +123,6 @@ const Login = () => {
 
 
 
-
     // Handle the login process
     const handleLogin = async (formData) => {
         try {
@@ -138,6 +132,10 @@ const Login = () => {
             const tokenResponse = await getTokenRequest(token);
             const tokenDescription = tokenResponse.data;
             console.log(tokenDescription);
+
+            // Save the token and token description in local storage
+            localStorage.setItem("userToken", token);
+            localStorage.setItem("tokenDescription", JSON.stringify(tokenDescription));
 
         } catch (error) {
         }
@@ -202,6 +200,8 @@ const Login = () => {
                             placeholderText="Select a date"
                             {...error.period}
                         />
+
+
                         <TextField
                             className="mb-3"
                             name="username"
@@ -220,10 +220,16 @@ const Login = () => {
                             }}
                             variant="outlined"
                             fullWidth
-                            helperText={error.username.errorMsg} // Add the helperText prop to display the error message
+                            helperText={error.username.errorMsg}
                         />
+
                         {error.username.errorMsg && (
                             <span style={{ color: 'red' }}>Please enter a username</span>)}
+
+
+
+
+
                         <TextField
                             className="mb-3"
                             name="password"
@@ -249,6 +255,8 @@ const Login = () => {
                             <span style={{ color: 'red' }}>Please enter password</span>)}
 
 
+
+
                         <Select
                             name="lang"
                             title="Language"
@@ -270,9 +278,10 @@ const Login = () => {
                             }
                             label="Remember Password"
                         />
+
+
+
                     </div>
-
-
                 </CardContent>
                 <CardActions className={classes.actions}>
                     <Button variant="contained" color="primary" onClick={handleSubmit}>
