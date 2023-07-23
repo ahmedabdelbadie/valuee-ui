@@ -4,18 +4,17 @@ import { useRoutes } from "react-router-dom";
 // import { useAuth } from "@/lib/auth";
 
 import { protectedRoutes } from "./protectedRoutes";
-// import { publicRoutes } from "./publicRoutes";
+import { publicRoutes } from "./publicRoutes";
 import React from "react";
-import { Container } from "@mui/material";
+
 export const AppRoutes = () => {
-  //   const auth = useAuth();
+  const auth = false; //useAuth();
 
   // const commonRoutes = [{ path: "/", element: <Landing /> }];
 
-  const routes = protectedRoutes; //: publicRoutes;
-  //, ...commonRoutes
+  const routes = true ? protectedRoutes : publicRoutes;
+  //  , ...commonRoutes
   const element = useRoutes([...routes]);
 
   return <>{element}</>;
-  //  <>{element}</>;
 };

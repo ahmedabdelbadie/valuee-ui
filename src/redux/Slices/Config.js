@@ -11,7 +11,7 @@ const config = createSlice({
       state.lang = action.payload === "ar" ? "ar" : "en";
     },
     changeTheme: (state, action) => {
-      state.Theme = action.payload === "Dark" ? "Dark" : "en";
+      state.Theme = action.payload === "dark" ? "dark" : "light";
     },
   },
 });

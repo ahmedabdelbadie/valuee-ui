@@ -32,7 +32,8 @@ export default function Footer() {
     >
       <Container maxWidth="lg">
         <Typography variant="body1">
-          My sticky footer can be found here.
+          Value ERP Version 1.4.0 Copyright � 2018 - All Rights Reserved For
+          High Speed Information Technology
         </Typography>
         <Copyright />
       </Container>

@@ -7,7 +7,6 @@ import { ThemeProvider } from "@mui/material/styles";
 import { BrowserRouter as Router } from "react-router-dom";
 import theme from "../themes";
 import store from "redux/Store";
-import { useTheme } from "@mui/material";
 import { Provider, useSelector } from "react-redux";
 
 const AppTheme = (props) => {
