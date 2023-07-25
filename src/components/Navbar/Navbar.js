@@ -1,5 +1,5 @@
 import React from "react";
-import Logo from "../../components/Assets/Images/Copy of VALUE+-LogoArtboard-1-copy-15.webp";
+import Logo from "../../components/Assets/Images/logo.png";
 import {
   IconButton,
   Tooltip,
@@ -77,12 +77,15 @@ const Navbar = () => {
         </IconButton>
         <Link href="/">
           <Tooltip title="Value">
-            <IconButton variant="square" sx={{ p: 0 }}>
-              <Avatar variant="square" alt="logo" src={Logo} />
-            </IconButton>
+            <Avatar
+              variant="square"
+              alt="logo"
+              src={Logo}
+              sx={{ width: 100 }}
+            />
           </Tooltip>
         </Link>
-        <Typography ml={6} variant="h6" component="div" sx={{ flexGrow: 1 }}>
+        <Typography ml={6} variant="h1" component="div" sx={{ flexGrow: 1 }}>
           Value Plus ERP
         </Typography>
         <IconButton color="inherit">

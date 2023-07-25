@@ -47,6 +47,13 @@ export default function componentStyleOverrides(theme) {
         },
       },
     },
+    MuiListItem: {
+      styleOverrides: {
+        root: {
+          display: "block",
+        },
+      },
+    },
     MuiListItemButton: {
       styleOverrides: {
         root: {
@@ -76,7 +83,7 @@ export default function componentStyleOverrides(theme) {
     MuiListItemIcon: {
       styleOverrides: {
         root: {
-          color: theme.darkTextPrimary,
+          color: theme.iconcolor,
           minWidth: "36px",
         },
       },

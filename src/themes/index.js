@@ -57,7 +57,7 @@ const theme = (customization) => {
   };
   const themeOption = {
     colors: color,
-    heading: color.grey900,
+    heading: color.grey500,
     paper: color.paper,
     backgroundDefault: color.paper,
     background: color.primaryLight,
@@ -67,6 +67,7 @@ const theme = (customization) => {
     menuSelected: color.secondaryDark,
     menuSelectedBack: color.secondaryLight,
     divider: color.grey200,
+    iconcolor: color.secondaryMain,
     customization,
   };
 
