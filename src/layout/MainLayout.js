@@ -1,5 +1,5 @@
 import Navbar from "../components/Navbar";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../components/Sidebar/Sidebar";
 import Footer from "components/Footer/Footer";
 import { styled } from "@mui/material/styles";
 import { Suspense } from "react";
@@ -44,6 +44,7 @@ const Mainlayout = () => {
       <CssBaseline />
       <Navbar />
       <Sidebar />
+
       <Main open={isOpen}>
         <DrawerHeader />
         <Suspense fallback="Loading...">
