@@ -3,9 +3,9 @@ import Navbar from "components/Navbar";
 import { Outlet } from "react-router-dom";
 import React from "react";
 import { Box, Container, styled } from "@mui/material";
-const Login = lazy(() => import("../Services/auth/routes/Login"), "Login");
+const Login = lazy(() => import("../Services/auth/pages/Login"), "Login");
 const Register = lazy(
-  () => import("../Services/auth/routes/Register"),
+  () => import("../Services/auth/pages/Register"),
   "Register"
 );
 const DrawerHeader = styled("div")(({ theme }) => ({

@@ -8,6 +8,10 @@ const Dashboard = lazy(
   () => import("../pages/Dashboard/Dashboard"),
   "Dashboard"
 );
+const Dashboard2 = lazy(
+  () => import("../pages/Dashboard/Dashboard2"),
+  "Dashboard2"
+);
 const GL = lazy(() => import("../pages/General-ledger/General-ledger"), "GL");
 const GLCharts = lazy(
   () => import("../pages/General-ledger/General-Ledger-Charts"),
@@ -35,6 +39,7 @@ export const protectedRoutes = [
     children: [
       { path: "", element: <Dashboard /> },
       { path: "dashboard", element: <Dashboard /> },
+      { path: "dashboard2", element: <Dashboard2 /> },
       { path: "general-ledger", element: <GL /> },
       { path: "gl/charts", element: <GLCharts /> },
       { path: "organization", element: <Organization /> },

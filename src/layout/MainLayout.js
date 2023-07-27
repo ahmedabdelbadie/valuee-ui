@@ -13,7 +13,6 @@ import { Box } from "@mui/material";
 const Mainlayout = () => {
   const { isOpen, drawerWidth } = useSelector((state) => state.sidebar);
   const DrawerHeader = styled("div")(({ theme }) => ({
-    display: "flex",
     alignItems: "center",
     padding: theme.spacing(0, 1),
     ...theme.mixins.toolbar,

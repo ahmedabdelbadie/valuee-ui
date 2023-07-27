@@ -8,23 +8,26 @@ import { BrowserRouter as Router } from "react-router-dom";
 import theme from "../themes";
 import store from "redux/Store";
 import { Provider, useSelector } from "react-redux";
-
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 const AppTheme = (props) => {
   const customization = useSelector((state) => state.customization);
 
   return (
     <StyledEngineProvider injectfirst>
       <ThemeProvider theme={theme(customization)}>
-        <CssBaseline />
-        <React.Suspense
-          fallback={
-            <div className="flex items-center justify-center w-screen h-screen"></div>
-          }
-        >
-          <ErrorBoundary FallbackComponent={ErrorFallback}>
-            <Router>{props.children}</Router>
-          </ErrorBoundary>
-        </React.Suspense>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <CssBaseline />
+          <React.Suspense
+            fallback={
+              <div className="flex items-center justify-center w-screen h-screen"></div>
+            }
+          >
+            <ErrorBoundary FallbackComponent={ErrorFallback}>
+              <Router>{props.children}</Router>
+            </ErrorBoundary>
+          </React.Suspense>
+        </LocalizationProvider>
       </ThemeProvider>
     </StyledEngineProvider>
   );

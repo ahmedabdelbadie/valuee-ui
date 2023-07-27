@@ -71,7 +71,7 @@ const Navbar = () => {
           edge="start"
           size="large"
           color="inherit"
-          sx={{ mr: 2, ...(isOpen && { display: "none" }) }}
+          sx={{ mr: 2, ...(isOpen && { display: "block" }) }}
         >
           <MenuIcon />
         </IconButton>
