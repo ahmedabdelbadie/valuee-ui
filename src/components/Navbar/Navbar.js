@@ -22,22 +22,13 @@ import {
 import { useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleOpen } from "../../redux/Slices/Sidebar";
+import { changeTheme } from "redux/Slices/Config";
 const Navbar = () => {
-  const Nav = styled(MuiAppBar, {
-    shouldForwardProp: (prop) => prop !== "open",
-  })(({ theme, open }) => ({
-    backgroundColor: theme.palette.primary.light,
+  const Nav = styled(MuiAppBar)(({ theme }) => ({
+    backgroundColor: theme.palette.primary,
     transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.easeInOut,
       duration: theme.transitions.duration.leavingScreen,
-    }),
-    ...(open && {
-      width: `calc(100% - ${drawerWidth}px)`,
-      marginLeft: `${drawerWidth}px`,
-      transition: theme.transitions.create(["margin", "width"], {
-        easing: theme.transitions.easing.easeInOut,
-        duration: theme.transitions.duration.leavingScreen,
-      }),
     }),
   }));
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -58,12 +49,14 @@ const Navbar = () => {
     handleUserClose();
     setRedirectToLogin(true);
   }, []);
+  const { isLight } = useSelector((state) => state.config);
   const switchTheme = () => {
-    //dispatch(changeTheme());
+    console.log(isLight);
+    dispatch(changeTheme(!isLight));
   };
   const numberOfNotifications = 3;
   return (
-    <Nav position="fixed" open={isOpen}>
+    <Nav position="relative" sx={{ boxShadow: "0 0 0 0" }}>
       <Toolbar>
         <IconButton
           onClick={handleToggle}
@@ -75,19 +68,7 @@ const Navbar = () => {
         >
           <MenuIcon />
         </IconButton>
-        <Link href="/">
-          <Tooltip title="Value">
-            <Avatar
-              variant="square"
-              alt="logo"
-              src={Logo}
-              sx={{ width: 100 }}
-            />
-          </Tooltip>
-        </Link>
-        <Typography ml={6} variant="h1" component="div" sx={{ flexGrow: 1 }}>
-          Value Plus ERP
-        </Typography>
+
         <IconButton color="inherit">
           <Badge badgeContent={numberOfNotifications} color="error">
             <NotificationsIcon />

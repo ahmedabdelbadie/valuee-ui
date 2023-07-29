@@ -50,16 +50,25 @@ export default function componentStyleOverrides(theme) {
     MuiListItem: {
       styleOverrides: {
         root: {
+          color: theme.primaryDark,
           display: "block",
+          background: "transparent",
+          "> a": {
+            textDecoration: "none",
+          },
         },
       },
+    },
+    MuiExpandMore: {
+      styleOverrides: { root: { transform: "rotate(-90deg)" } },
     },
     MuiListItemButton: {
       styleOverrides: {
         root: {
-          color: theme.darkTextPrimary,
-          paddingTop: "10px",
-          paddingBottom: "10px",
+          color: theme.darkTextSecondary,
+          "& .MuiListItemIcon-root": {
+            color: theme.primaryMain,
+          },
           "&.Mui-selected": {
             color: theme.menuSelected,
             backgroundColor: theme.menuSelectedBack,
@@ -67,7 +76,7 @@ export default function componentStyleOverrides(theme) {
               backgroundColor: theme.menuSelectedBack,
             },
             "& .MuiListItemIcon-root": {
-              color: theme.menuSelected,
+              color: theme.primaryMain,
             },
           },
           "&:hover": {
@@ -80,18 +89,14 @@ export default function componentStyleOverrides(theme) {
         },
       },
     },
-    MuiListItemIcon: {
-      styleOverrides: {
-        root: {
-          color: theme.iconcolor,
-          minWidth: "36px",
-        },
-      },
-    },
     MuiListItemText: {
       styleOverrides: {
-        primary: {
-          color: theme.textDark,
+        root: {
+          fontSize: "0.875rem",
+          lineHeight: "1.339em",
+          fontWeight: 400,
+          fontFamily: ["Roboto", "sans-serif"],
+          color: theme.grey900,
         },
       },
     },
@@ -169,7 +174,7 @@ export default function componentStyleOverrides(theme) {
       styleOverrides: {
         root: {
           color: theme.colors?.primaryDark,
-          background: theme.colors?.primary200,
+          background: theme.colors.primary,
         },
       },
     },
@@ -186,7 +191,7 @@ export default function componentStyleOverrides(theme) {
       styleOverrides: {
         tooltip: {
           color: theme.paper,
-          background: theme.colors?.grey700,
+          background: theme.colors.primary,
         },
       },
     },

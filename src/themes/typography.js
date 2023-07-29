@@ -37,10 +37,11 @@ export default function themeTypography(theme) {
       fontWeight: 700,
       fontFamily: ['"Helvetica Neue"'],
     },
-    subtitle1: {
-      fontSize: "0.875rem",
+    logo: {
+      fontSize: "1.2rem",
       fontWeight: 500,
-      color: theme.textDark,
+      color: theme.paper,
+      fontFamily: ["Hind Vadodara"],
     },
     subtitle2: {
       fontSize: "0.75rem",
@@ -115,15 +116,21 @@ export default function themeTypography(theme) {
       cursor: "pointer",
       borderRadius: "8px",
     },
-    smallAvatar: {
-      width: "22px",
-      height: "22px",
-      fontSize: "1rem",
+    smallText: {
+      background: "transparent",
+      padding: "0.375rem 1.5rem",
+      fontSize: "0.75rem",
+      fontWeight: 200,
+      textTransform: null,
+      color: theme.smallText,
     },
-    mediumAvatar: {
-      width: "34px",
-      height: "34px",
-      fontSize: "1.2rem",
+    mediumText: {
+      background: "transparent",
+      padding: "0.375rem 1.5rem",
+      fontSize: "0.75rem",
+      fontWeight: 500,
+      textTransform: null,
+      color: theme.darkTextPrimary,
     },
     largeAvatar: {
       width: "44px",

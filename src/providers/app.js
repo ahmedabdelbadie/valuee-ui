@@ -11,7 +11,7 @@ import { Provider, useSelector } from "react-redux";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 const AppTheme = (props) => {
-  const customization = useSelector((state) => state.customization);
+  const customization = useSelector((state) => state.config);
 
   return (
     <StyledEngineProvider injectfirst>

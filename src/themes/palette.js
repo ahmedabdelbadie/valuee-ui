@@ -1,11 +1,11 @@
 export default function themePalette(theme) {
   return {
-    mode: "light",
+    mode: theme.customization.isLight ? "light" : "dark",
     common: {
       black: theme.colors?.darkPaper,
     },
     primary: {
-      light: theme.colors?.primary200,
+      light: theme.colors?.primaryLight,
       main: theme.colors?.primaryMain,
       dark: theme.colors?.primaryDark,
       200: theme.colors?.primary200,

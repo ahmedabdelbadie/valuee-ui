@@ -14,6 +14,7 @@ const Mainlayout = () => {
   const { isOpen, drawerWidth } = useSelector((state) => state.sidebar);
   const DrawerHeader = styled("div")(({ theme }) => ({
     alignItems: "center",
+    borderRight: 0,
     padding: theme.spacing(0, 1),
     ...theme.mixins.toolbar,
     justifyContent: "flex-end",
@@ -21,6 +22,8 @@ const Mainlayout = () => {
 
   const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
     ({ theme, open }) => ({
+      display: "block",
+      borderRight: 0,
       flexGrow: 1,
       padding: theme.spacing(3),
       transition: theme.transitions.create("margin", {
@@ -41,10 +44,10 @@ const Mainlayout = () => {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <Navbar />
+
       <Sidebar />
       <Main open={isOpen}>
-        <DrawerHeader />
+        <Navbar />
         <Suspense fallback="Loading...">
           <Outlet />
           <Footer />

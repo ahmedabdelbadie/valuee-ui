@@ -6,10 +6,10 @@ import themeTypography from "./typography";
 const theme = (customization) => {
   const color = {
     paper: "#ffffff",
-    primaryLight: "#eef2f6",
+    primaryLight: "#f4f7fc",
     primary200: "#90caf9",
-    primaryMain: "#2196f3",
-    primaryDark: "#1e88e5",
+    primaryMain: "#153d77",
+    primaryDark: "#28304e",
     primary800: "#1565c0",
     secondaryLight: "#ede7f6",
     secondary200: "#b39ddb",
@@ -54,6 +54,7 @@ const theme = (customization) => {
     darkSecondaryDark: "#651fff",
     darkSecondary200: "#b39ddb",
     darkSecondary800: "#6200ea",
+    smallText: "#adb5bd",
   };
   const themeOption = {
     colors: color,
@@ -70,7 +71,7 @@ const theme = (customization) => {
     iconcolor: color.secondaryMain,
     customization,
   };
-
+  console.log(customization);
   const themeOptions = {
     direction: "ltr",
     palette: themePalette(themeOption),

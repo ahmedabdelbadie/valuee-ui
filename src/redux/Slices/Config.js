@@ -4,18 +4,27 @@ const config = createSlice({
   name: "config",
   initialState: {
     lang: "en",
-    Theme: "light",
+    isLight: true,
+    fontFamily: `'Roboto', sans-serif`,
+    borderRadius: 12,
   },
   reducers: {
     changeLang: (state, action) => {
       state.lang = action.payload === "ar" ? "ar" : "en";
     },
     changeTheme: (state, action) => {
-      state.Theme = action.payload === "dark" ? "dark" : "light";
+      state.isLight = action.payload;
+    },
+    changeFontFamily: (state, action) => {
+      state.fontFamily = action.payload;
+    },
+    changeBorderRadius: (state, action) => {
+      state.borderRadius = action.payload;
     },
   },
 });
 
-export const { changeLang, changeTheme } = config.reducer;
+export const { changeLang, changeTheme, changeFontFamily, changeBorderRadius } =
+  config.actions;
 
 export default config.reducer;
