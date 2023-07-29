@@ -21,7 +21,10 @@ const Organization = lazy(
   () => import("../pages/Organization/Organization"),
   "Organization"
 );
-
+const CompanyList = lazy(
+  () => import("../features/Organization/pages/Company/List"),
+  "CompanyList"
+);
 const App = () => {
   return (
     <>
@@ -43,6 +46,7 @@ export const protectedRoutes = [
       { path: "general-ledger", element: <GL /> },
       { path: "gl/charts", element: <GLCharts /> },
       { path: "organization", element: <Organization /> },
+      { path: "company", element: <CompanyList /> },
     ],
   },
 ];

@@ -16,7 +16,7 @@ import { Bar } from "react-chartjs-2";
 
 Chart.register(CategoryScale);
 
-const columns: GridColDef[] = [
+const columns = [
   { field: "id", headerName: "ID", width: 90 },
   {
     field: "firstName",

@@ -35,8 +35,14 @@ import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import DoorSlidingIcon from "@mui/icons-material/DoorSliding";
 import PinchIcon from "@mui/icons-material/Pinch";
 import DashboardIcon from "@mui/icons-material/Dashboard";
+import BusinessIcon from "@mui/icons-material/Business";
+import ApartmentIcon from "@mui/icons-material/Apartment";
 const getIcon = (name) => {
   switch (name) {
+    case "Branches":
+      return <BusinessIcon />;
+    case "Companies":
+      return <ApartmentIcon />;
     case "Organization":
       return <HomeIcon />;
     case "Dashboard":
@@ -77,6 +83,7 @@ const SidebarComponent = (prop) => {
   const [isOpenCS, setOpenCS] = useState(false);
   const [isOpenGLT, setOpenGLT] = useState(false);
   const [isOpenGLQ, setOpenGLQ] = useState(false);
+  const [isOpenOr, setOpenOr] = useState(false);
 
   const theme = useTheme();
   const DrawerHeader = styled("div")(({ theme }) => ({
@@ -106,6 +113,9 @@ const SidebarComponent = (prop) => {
   };
   const handleGLQToggle = () => {
     setOpenGLQ(!isOpenGLQ);
+  };
+  const handleOrToggle = () => {
+    setOpenOr(!isOpenOr);
   };
   return (
     <Drawer
@@ -146,12 +156,36 @@ const SidebarComponent = (prop) => {
           </Link>
         </ListItem>
         <ListItem key={1} disablePadding>
-          <Link href="organization" sx={{ textDecoration: "none" }}>
-            <ListItemButton>
-              <ListItemIcon>{getIcon("Organization")}</ListItemIcon>
-              <ListItemText primary="Organization" />
-            </ListItemButton>
-          </Link>
+          <ListItemButton onClick={handleOrToggle}>
+            <ListItemIcon>{getIcon("Organization")}</ListItemIcon>
+            <ListItemText primary="Organization" />
+            {isOpenOr ? <ExpandLess /> : <ExpandMore />}
+          </ListItemButton>
+          <Collapse
+            in={isOpenOr}
+            timeout="auto"
+            unmountOnExit
+            orientation="vertical"
+          >
+            <List component="div" disablePadding>
+              <ListItem key={0} disablePadding>
+                <Link href="company" sx={{ textDecoration: "none" }}>
+                  <ListItemButton sx={{ pl: 4 }} onClick={handleGLMFToggle}>
+                    <ListItemIcon>{getIcon("Companies")}</ListItemIcon>
+                    <ListItemText primary="Companies" />
+                  </ListItemButton>
+                </Link>
+              </ListItem>
+              <ListItem key={1} disablePadding>
+                <Link href="branch" sx={{ textDecoration: "none" }}>
+                  <ListItemButton sx={{ pl: 4 }} onClick={handleGLMFToggle}>
+                    <ListItemIcon>{getIcon("Branches")}</ListItemIcon>
+                    <ListItemText primary="Branches" />
+                  </ListItemButton>
+                </Link>
+              </ListItem>
+            </List>
+          </Collapse>
         </ListItem>
         <ListItem key={2} disablePadding>
           <ListItemButton onClick={handleGLToggle}>
