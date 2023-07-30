@@ -71,9 +71,10 @@ const theme = (customization) => {
     iconcolor: color.secondaryMain,
     customization,
   };
-  console.log(customization);
+
   const themeOptions = {
     direction: "ltr",
+    spacing: (factor) => `${0.25 * factor}rem`,
     palette: themePalette(themeOption),
     mixins: {
       toolbar: {

@@ -26,10 +26,6 @@ import { changeTheme } from "redux/Slices/Config";
 const Navbar = () => {
   const Nav = styled(MuiAppBar)(({ theme }) => ({
     backgroundColor: theme.palette.primary,
-    transition: theme.transitions.create(["margin", "width"], {
-      easing: theme.transitions.easing.easeInOut,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
   }));
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [redirectToLogin, setRedirectToLogin] = useState(false);
@@ -51,7 +47,6 @@ const Navbar = () => {
   }, []);
   const { isLight } = useSelector((state) => state.config);
   const switchTheme = () => {
-    console.log(isLight);
     dispatch(changeTheme(!isLight));
   };
   const numberOfNotifications = 3;
@@ -75,7 +70,7 @@ const Navbar = () => {
           </Badge>
         </IconButton>
 
-        <Switch onChange={switchTheme} color="default" />
+        <Switch onChange={switchTheme} checked={isLight} color="default" />
 
         <IconButton color="inherit" onClick={handleUserToggle}>
           <AccountCircle />

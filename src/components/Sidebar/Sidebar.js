@@ -96,7 +96,6 @@ const SidebarComponent = (prop) => {
         ? theme.palette.primary.light
         : theme.palette.primary.main,
     display: "flex",
-
     padding: theme.spacing(0, 2),
     ...theme.mixins.toolbar,
     justifyContent: "start",
@@ -235,11 +234,15 @@ const SidebarComponent = (prop) => {
               primaryTypographyProps={{ variant: "mediumText" }}
               primary="Organization"
             />
-            {isOpenOr ? (
-              <ExpandLess sx={{ transform: "rotate(180deg)" }} />
-            ) : (
-              <ExpandMore sx={{ transform: "rotate(-90deg)" }} />
-            )}
+            <ExpandLess
+              sx={[
+                {
+                  transform: "rotate(90deg)",
+                  transition: "transform .4s ease-in-out",
+                },
+                isOpenOr && { transform: "rotate(180deg)" },
+              ]}
+            />
           </ListItemButton>
           <Collapse
             in={isOpenOr}
@@ -275,11 +278,15 @@ const SidebarComponent = (prop) => {
               primaryTypographyProps={{ variant: "mediumText" }}
               primary="General Ledger"
             />
-            {isOpenGL ? (
-              <ExpandLess />
-            ) : (
-              <ExpandMore sx={{ transform: "rotate(-90deg)" }} />
-            )}
+            <ExpandLess
+              sx={[
+                {
+                  transform: "rotate(90deg)",
+                  transition: "transform .4s ease-in-out",
+                },
+                isOpenGL && { transform: "rotate(180deg)" },
+              ]}
+            />
           </ListItemButton>
           <Collapse
             in={isOpenGL}
@@ -294,11 +301,15 @@ const SidebarComponent = (prop) => {
                     {getIcon("General Ledger Master Files")}
                   </ListItemIcon>
                   <ListItemText primary="General Ledger Master Files" />
-                  {isOpenGLMF ? (
-                    <ExpandLess />
-                  ) : (
-                    <ExpandMore sx={{ transform: "rotate(-90deg)" }} />
-                  )}
+                  <ExpandLess
+                    sx={[
+                      {
+                        transform: "rotate(90deg)",
+                        transition: "transform .4s ease-in-out",
+                      },
+                      isOpenGLMF && { transform: "rotate(180deg)" },
+                    ]}
+                  />
                 </ListItemButton>
                 <Collapse
                   in={isOpenGLMF}
@@ -331,11 +342,15 @@ const SidebarComponent = (prop) => {
                       <ListItemButton sx={{ pl: 6 }} onClick={handleCSToggle}>
                         <ListItemIcon>{getIcon("Cost Centers")}</ListItemIcon>
                         <ListItemText primary="Cost Centers" />
-                        {isOpenCS ? (
-                          <ExpandLess />
-                        ) : (
-                          <ExpandMore sx={{ transform: "rotate(-90deg)" }} />
-                        )}
+                        <ExpandLess
+                          sx={[
+                            {
+                              transform: "rotate(90deg)",
+                              transition: "transform .4s ease-in-out",
+                            },
+                            isOpenCS && { transform: "rotate(180deg)" },
+                          ]}
+                        />
                       </ListItemButton>
                       <Collapse
                         in={isOpenCS}
@@ -384,11 +399,15 @@ const SidebarComponent = (prop) => {
                     {getIcon("General Ledger Transactions")}
                   </ListItemIcon>
                   <ListItemText primary="General Ledger Transactions" />
-                  {isOpenGLT ? (
-                    <ExpandLess />
-                  ) : (
-                    <ExpandMore sx={{ transform: "rotate(-90deg)" }} />
-                  )}
+                  <ExpandLess
+                    sx={[
+                      {
+                        transform: "rotate(90deg)",
+                        transition: "transform .4s ease-in-out",
+                      },
+                      isOpenGLT && { transform: "rotate(180deg)" },
+                    ]}
+                  />
                 </ListItemButton>
                 <Collapse
                   in={isOpenGLT}
@@ -426,11 +445,15 @@ const SidebarComponent = (prop) => {
                     {getIcon("General Ledger Queries")}
                   </ListItemIcon>
                   <ListItemText primary="General Ledger Queries" />
-                  {isOpenGLQ ? (
-                    <ExpandLess />
-                  ) : (
-                    <ExpandMore sx={{ transform: "rotate(-90deg)" }} />
-                  )}
+                  <ExpandLess
+                    sx={[
+                      {
+                        transform: "rotate(90deg)",
+                        transition: "transform .4s ease-in-out",
+                      },
+                      isOpenGLQ && { transform: "rotate(180deg)" },
+                    ]}
+                  />
                 </ListItemButton>
                 <Collapse
                   in={isOpenGLQ}
@@ -471,40 +494,3 @@ const SidebarComponent = (prop) => {
   );
 };
 export default SidebarComponent;
-
-/*
-{sidebarData().map((item, index) => (
-          <ListItem key={index} disablePadding>
-             <Link
-              href={item.name.toLowerCase().replace(" ", "-")}
-              
-            > 
-            <ListItemButton onClick={handleClick}>
-              <ListItemIcon>{getIcon(item.name)}</ListItemIcon>
-              <ListItemText primary={item.name.toLowerCase()} />
-              {item.name === "GENERAL LEDGER" &&
-                (glOpen ? <ExpandLess /> : <ExpandMore sx={{ transform: "rotate(-90deg)" }} />)}
-            </ListItemButton>
-            {Array.isArray(item.children) && item.name === "GENERAL LEDGER" && (
-              <Collapse
-                in={glOpen}
-                timeout="auto"
-                unmountOnExit
-                orientation="vertical"
-              >
-                <List component="div" disablePadding>
-                  {item.children.map((child, index) => (
-                    <ListItem key={index} disablePadding>
-                      <ListItemButton sx={{ pl: 4 }}>
-                        <ListItemIcon>{getIcon(child.name)}</ListItemIcon>
-                        <ListItemText primary={child.name} />
-                      </ListItemButton>
-                    </ListItem>
-                  ))}
-                </List>
-              </Collapse>
-            )}
-             </Link> 
-          </ListItem>
-        ))}
-        */
