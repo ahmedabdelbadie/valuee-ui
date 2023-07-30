@@ -3,8 +3,9 @@ import { Outlet } from "react-router-dom";
 
 import MainLayout from "../layout/MainLayout";
 import React from "react";
-import { Container } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import { styled } from "@material-ui/core";
+import { useTheme } from "@mui/material/styles";
 const Dashboard = lazy(
   () => import("../pages/Dashboard/Dashboard"),
   "Dashboard"
@@ -27,20 +28,24 @@ const CompanyList = lazy(
   "CompanyList"
 );
 const App = () => {
-  const MainContainer = styled("div")({
+  const theme = useTheme();
+  const MainContainer = styled(Box)({
     "&::before": {
       width: "100%",
       height: "264px",
       position: "absolute",
       top: "0",
       left: "0",
-      background: "#153d77",
+      background:
+        theme.palette.mode === "dark"
+          ? theme.palette.primary.light
+          : theme.palette.primary.main,
       content: "''",
     },
   });
 
   return (
-    <MainContainer component="wrapper">
+    <MainContainer>
       <MainLayout />
     </MainContainer>
   );

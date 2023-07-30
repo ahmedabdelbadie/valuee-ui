@@ -40,7 +40,7 @@ export default function themeTypography(theme) {
     logo: {
       fontSize: "1.2rem",
       fontWeight: 500,
-      color: theme.paper,
+      color: theme.customization.isLight ? theme.paper : theme.darkPrimaryLight,
       fontFamily: ["Hind Vadodara"],
     },
     subtitle2: {

@@ -312,8 +312,6 @@ const Login = () => {
       return;
     }
 
-    console.log("Data:", { ...form });
-
     try {
       await handleLogin(form);
     } catch (error) {
