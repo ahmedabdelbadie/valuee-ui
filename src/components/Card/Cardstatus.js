@@ -24,8 +24,8 @@ const StyledAvatar = styled("div")(({ theme }) => ({
     theme.palette.mode === "dark"
       ? theme.palette.primary.light
       : theme.palette.primary.main,
-  width: '70px',
-  height: "70px",
+  width: '65px',
+  height: "65px",
   borderRadius: "50%",
   display: "flex",
   alignItems: "center",
@@ -40,7 +40,7 @@ const StyledAvatar = styled("div")(({ theme }) => ({
 const StyledPriceContainer = styled("span")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
-  fontSize: "2rem",
+  fontSize: "1.8rem",
   fontWeight: "bold",
   marginTop: "-10%",
   marginBottom: "10%",

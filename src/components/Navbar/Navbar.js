@@ -2,14 +2,10 @@ import React from "react";
 import Logo from "../../components/Assets/Images/logo.png";
 import {
   IconButton,
-  Tooltip,
   Typography,
   Toolbar,
-  Avatar,
   Badge,
-  Link,
-  Menu,
-  MenuItem,
+
   Switch,
   FormControlLabel,
 } from "@mui/material";
@@ -67,11 +63,11 @@ const Navbar = () => {
           <MenuIcon />
         </IconButton>
 
-        <IconButton color="inherit">
+        {/* <IconButton color="inherit">
           <Badge badgeContent={numberOfNotifications} color="error">
             <NotificationsIcon />
           </Badge>
-        </IconButton>
+        </IconButton> */}
 
         <Typography component="div" sx={{ ml: "auto" }}>
           <FormControlLabel
