@@ -24,7 +24,8 @@ import { useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleOpen } from "../../redux/Slices/Sidebar";
 import { changeTheme } from "redux/Slices/Config";
-import NotificationSection from "../Notification/NotificationSection";
+import NotificationSection from "../Notification/NotificationSection"
+import ProfileSection from './ProfileSection/ProfileSection'
 const Navbar = () => {
   const Nav = styled(MuiAppBar)(({ theme }) => ({
     backgroundColor: theme.palette.primary,
@@ -83,7 +84,7 @@ const Navbar = () => {
             }
           />
 
-          {/* <ProfileSection /> */}
+          <ProfileSection />
         </Typography>
         <NotificationSection />
       </Toolbar>
