@@ -1,31 +1,37 @@
+import React from "react";
 import { Line } from "react-chartjs-2";
+import { Filler } from "chart.js";
+import Chart from "chart.js/auto";
+Chart.register(Filler);
 const LineChart = () => {
-  const labels = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-  const dataLine = {
-    labels: labels,
+  const data = {
+    labels: ["January", "February", "March", "April", "May", "June", "July"],
     datasets: [
       {
-        label: "My First Dataset",
-        data: [65, 59, 80, 81, 56, 55, 40],
-        fill: false,
-        borderColor: "rgb(75, 192, 192)",
-        tension: 0.1,
+        label: "Sales Data",
+        data: [12, 19, 3, 5, 2, 3, 9],
+        borderColor: "#2196F3",
+        backgroundColor: "rgba(33, 150, 243, 0.2)",
+        fill: true,
       },
     ],
   };
-  return <Line data={dataLine} />;
+
+  const options = {
+    scales: {
+      y: {
+        beginAtZero: true,
+      },
+    },
+  };
+
+  return (
+    <div
+      sx={{ backgroundColor: "#000", "&::after": { backgroundColor: "#000" } }}
+    >
+      <Line data={data} options={options} />{" "}
+    </div>
+  );
 };
+
 export default LineChart;

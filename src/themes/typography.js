@@ -18,8 +18,9 @@ export default function themeTypography(theme) {
     },
     h4: {
       fontSize: "1rem",
-      color: theme.heading,
+      color: theme.paper,
       fontWeight: 600,
+      fontFamily: "Hind Vadodara",
     },
     h3: {
       fontSize: "1.25rem",
@@ -33,9 +34,10 @@ export default function themeTypography(theme) {
     },
     h1: {
       fontSize: "2.125rem",
-      color: theme.heading,
+      color: theme.paper,
       fontWeight: 700,
       fontFamily: ['"Helvetica Neue"'],
+      margin: "4 0 4 0",
     },
     logo: {
       fontSize: "1.2rem",

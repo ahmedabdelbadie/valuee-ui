@@ -23,8 +23,7 @@ const StyledAvatar = styled("div")(({ theme }) => ({
     theme.palette.mode === "dark"
       ? theme.palette.primary.light
       : theme.palette.primary.main,
-  width: 100,
-  height: 100,
+
   borderRadius: "50%",
   display: "flex",
   alignItems: "center",
@@ -108,7 +107,9 @@ const CardStatus = ({ headTitle, price, type, percentageText }) => {
         return (
           <LocalShippingIcon
             sx={{
-              fontSize: theme.spacing(10),
+              width: theme.spacing(10),
+              height: theme.spacing(10),
+              fontSize: theme.spacing(6),
               color: theme.palette.primary.light,
             }}
           />
