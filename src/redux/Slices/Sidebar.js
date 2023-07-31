@@ -4,7 +4,7 @@ const sidebar = createSlice({
   name: "sidebar",
   initialState: {
     isOpen: false,
-    drawerWidth: 300,
+    drawerWidth: 250,
   },
   reducers: {
     toggleOpen: (state) => {

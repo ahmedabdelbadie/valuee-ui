@@ -11,6 +11,7 @@ import {
   Menu,
   MenuItem,
   Switch,
+  FormControlLabel,
 } from "@mui/material";
 import { AccountCircle, ExitToApp } from "@mui/icons-material";
 import MuiAppBar from "@mui/material/AppBar";
@@ -23,6 +24,7 @@ import { useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleOpen } from "../../redux/Slices/Sidebar";
 import { changeTheme } from "redux/Slices/Config";
+import NotificationSection from "../Notification/NotificationSection";
 const Navbar = () => {
   const Nav = styled(MuiAppBar)(({ theme }) => ({
     backgroundColor: theme.palette.primary,
@@ -70,29 +72,20 @@ const Navbar = () => {
           </Badge>
         </IconButton>
 
-        <Switch onChange={switchTheme} checked={isLight} color="default" />
+        <Typography component="div" sx={{ ml: "auto" }}>
+          <FormControlLabel
+            control={
+              <Switch
+                onChange={switchTheme}
+                color="default"
+                checked={isLight}
+              />
+            }
+          />
 
-        <IconButton color="inherit" onClick={handleUserToggle}>
-          <AccountCircle />
-        </IconButton>
-
-        <Menu
-          anchorEl={isMenuOpen}
-          open={isMenuOpen}
-          onClose={handleUserClose}
-          anchorOrigin={{ vertical: "top", horizontal: "right" }}
-          transformOrigin={{ vertical: "top", horizontal: "right" }}
-          sx={{ marginTop: "40px" }}
-        >
-          <MenuItem onClick={handleUserClose}>
-            <AccountCircle sx={{ marginRight: 1 }} />
-            Profile
-          </MenuItem>
-          <MenuItem onClick={handleLogout}>
-            <ExitToApp sx={{ marginRight: 1 }} />
-            Logout
-          </MenuItem>
-        </Menu>
+          {/* <ProfileSection /> */}
+        </Typography>
+        <NotificationSection />
       </Toolbar>
     </Nav>
   );

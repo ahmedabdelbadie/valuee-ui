@@ -1,40 +1,40 @@
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import Footer from "components/Footer/Footer";
-import { styled } from "@mui/material/styles";
+import { styled, useTheme } from "@mui/material/styles";
 import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
 
 import CssBaseline from "@mui/material/CssBaseline";
 import React from "react";
-
-import { useSelector } from "react-redux";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useDispatch, useSelector } from "react-redux";
 import { Box } from "@mui/material";
+import { toggleOpen } from "../redux/Slices/Sidebar";
 const Mainlayout = () => {
   const { isOpen, drawerWidth } = useSelector((state) => state.sidebar);
-  const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
-    ({ theme, open }) => ({
-      display: "block",
 
-      flexGrow: 1,
-      padding: theme.spacing(3),
-      transition: theme.transitions.create("margin-left", {
-        easing: theme.transitions.easing.easeIn,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
-      marginLeft: `-${drawerWidth}px`,
-      ...(open && {
-        transition: theme.transitions.create("margin", {
-          easing: theme.transitions.easing.easeOut,
-          duration: theme.transitions.duration.leavingScreen,
-        }),
-        marginLeft: 0,
-      }),
-    })
-  );
+  const Main = styled("main")(({ theme }) => ({
+    display: "block",
+    flexGrow: 1,
+    padding: theme.spacing(3),
+    zIndex: 1000,
+  }));
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box
+      sx={[
+        {
+          display: "flex",
+          transition: `margin-left 2s cubic-bezier(0.42, 0, 0.58, 1)`,
+          marginLeft: `-${drawerWidth}px`,
+        },
+        isOpen && {
+          transition: `margin-left 2s cubic-bezier(0, 0, 0.2, 1)`,
+          marginLeft: 0,
+        },
+      ]}
+    >
       <CssBaseline />
 
       <Sidebar />

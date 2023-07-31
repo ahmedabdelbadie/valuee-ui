@@ -59,6 +59,15 @@ export default function componentStyleOverrides(theme) {
         },
       },
     },
+    MuiGrid: {
+      styleOverrides: {
+        root: {
+          "& .MuiPaper-root": {
+            background: "transparent",
+          },
+        },
+      },
+    },
     MuiExpandMore: {
       styleOverrides: { root: { transform: "rotate(-90deg)" } },
     },

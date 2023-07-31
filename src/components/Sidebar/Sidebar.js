@@ -42,6 +42,8 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import BusinessIcon from "@mui/icons-material/Business";
 import ApartmentIcon from "@mui/icons-material/Apartment";
 import avatarb2554d38 from "../Assets/Images/avatar.b2554d38.jpg";
+import useMediaQuery from "@mui/material/useMediaQuery";
+
 const getIcon = (name) => {
   switch (name) {
     case "Branches":
@@ -96,8 +98,6 @@ const SidebarComponent = (prop) => {
         ? theme.palette.primary.light
         : theme.palette.primary.main,
     display: "flex",
-    padding: theme.spacing(0, 2),
-    ...theme.mixins.toolbar,
     justifyContent: "start",
   }));
   const { isOpen, drawerWidth } = useSelector((state) => state.sidebar);
@@ -124,13 +124,17 @@ const SidebarComponent = (prop) => {
   const handleOrToggle = () => {
     setOpenOr(!isOpenOr);
   };
+
   return (
     <Drawer
       open={isOpen}
       anchor={"left"}
+      transitionDuration={{
+        enter: 2000,
+        exit: 2000,
+      }}
       sx={{
         width: drawerWidth,
-
         "& .MuiDrawer-paper": {
           width: drawerWidth,
           borderRight: 0,

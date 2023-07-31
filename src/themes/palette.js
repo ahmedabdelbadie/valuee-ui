@@ -64,5 +64,10 @@ export default function themePalette(theme) {
       paper: theme.paper,
       default: theme.backgroundDefault,
     },
+    boxShadow: {
+      light: theme.colors?.boxShadow,
+      dark: theme.colors?.boxShadow,
+      main: theme.colors?.boxShadow,
+    },
   };
 }

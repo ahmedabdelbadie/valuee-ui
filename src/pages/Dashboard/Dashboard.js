@@ -1,57 +1,107 @@
-import { useEffect, useState } from "react";
+import Chart from "chart.js/auto";
+import { CategoryScale } from "chart.js";
 
-// material-ui
-import { Grid } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import Paper from "@mui/material/Paper";
+import Grid from "@mui/material/Grid";
 
-// project imports
-import EarningCard from "../../components/Dashboard/EarningCard";
-import PopularCard from "../../components/Dashboard/PopularCard";
-import TotalOrderLineChartCard from "../../components/Dashboard/TotalOrderLineChartCard";
-import TotalIncomeDarkCard from "../../components/Dashboard/TotalIncomeDarkCard";
-import TotalIncomeLightCard from "../../components/Dashboard/TotalIncomeLightCard";
-import TotalGrowthBarChart from "../../components/Dashboard/TotalGrowthBarChart";
-// theme constant
-export const gridSpacing = 4;
+import CardStatus from "components/Card/Cardstatus";
 
-// ==============================|| DEFAULT DASHBOARD ||============================== //
+import LineChart from "components/Charts/LineChart";
+import BarChart from "components/Charts/BarChart";
+import DoughnutChart from "components/Charts/Doughnut";
+import DataCalenderChart from "components/Charts/DateCalendarChart";
+import MapChart from "components/Charts/MapChart";
+import DataGridChart from "components/Charts/DataGridChart";
+
+Chart.register(CategoryScale);
+
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: "center",
+  color: theme.palette.text.secondary,
+}));
 
 const Dashboard = () => {
-  const [isLoading, setLoading] = useState(true);
-  useEffect(() => {
-    setLoading(false);
-  }, []);
+  const salesTodayLabel = "Sales Today";
+  const salesPercentage = 25;
 
+  const price = "7856";
   return (
-    <Grid container spacing={gridSpacing} style={{ marginTop: 10 }}>
-      <Grid item xs={12}>
-        <Grid container spacing={gridSpacing}>
-          <Grid item lg={4} md={6} sm={6} xs={12} style={{ marginTop: 10 }}>
-            <EarningCard isLoading={isLoading} />
-          </Grid>
-          <Grid item lg={4} md={6} sm={6} xs={12}>
-            <TotalOrderLineChartCard isLoading={isLoading} />
-          </Grid>
-          <Grid item lg={4} md={12} sm={12} xs={12}>
-            <Grid container spacing={gridSpacing}>
-              <Grid item sm={6} xs={12} md={6} lg={12}>
-                <TotalIncomeDarkCard isLoading={isLoading} />
-              </Grid>
-              <Grid item sm={6} xs={12} md={6} lg={12}>
-                <TotalIncomeLightCard isLoading={isLoading} />
-              </Grid>
+    <Grid container spacing={2}>
+      <Grid item xs={6}>
+        <Item>
+          <LineChart />
+        </Item>
+      </Grid>
+      <Grid item xs={6}>
+        <Item>
+          <Grid container>
+            <Grid item xs={6}>
+              <Item>
+                <CardStatus
+                  headTitle={salesTodayLabel}
+                  price={price}
+                  percentageText={`${salesPercentage}%`}
+                />
+              </Item>
+            </Grid>{" "}
+            <Grid item xs={6}>
+              <Item>
+                <CardStatus
+                  headTitle={salesTodayLabel}
+                  price={price}
+                  percentageText={`${salesPercentage}%`}
+                />
+              </Item>
+            </Grid>{" "}
+            <Grid item xs={6}>
+              <Item>
+                <CardStatus
+                  headTitle={salesTodayLabel}
+                  price={price}
+                  percentageText={`${salesPercentage}%`}
+                />
+              </Item>
+            </Grid>{" "}
+            <Grid item xs={6}>
+              <Item>
+                <CardStatus
+                  headTitle={salesTodayLabel}
+                  price={price}
+                  percentageText={`${salesPercentage}%`}
+                />
+              </Item>
             </Grid>
           </Grid>
-        </Grid>
+        </Item>
       </Grid>
-      <Grid item xs={12}>
-        <Grid container spacing={gridSpacing}>
-          <Grid item xs={12} md={8}>
-            <TotalGrowthBarChart isLoading={isLoading} />
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <PopularCard isLoading={isLoading} />
-          </Grid>
-        </Grid>
+      <Grid item xs={3}>
+        <Item>
+          <DataCalenderChart />
+        </Item>
+      </Grid>
+      <Grid item xs={6}>
+        <Item>
+          <MapChart />
+        </Item>
+      </Grid>
+      <Grid item xs={3}>
+        <Item>
+          <DoughnutChart />
+        </Item>
+      </Grid>
+      <Grid item xs={8}>
+        <Item>
+          <DataGridChart />
+        </Item>
+      </Grid>
+      <Grid item xs={4}>
+        <Item>
+          <BarChart />
+        </Item>
       </Grid>
     </Grid>
   );

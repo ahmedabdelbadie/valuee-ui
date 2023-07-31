@@ -55,6 +55,7 @@ const theme = (customization) => {
     darkSecondary200: "#b39ddb",
     darkSecondary800: "#6200ea",
     smallText: "#adb5bd",
+    boxShadow: "rgba(0, 0, 0, 0.5)",
   };
   const themeOption = {
     colors: color,
