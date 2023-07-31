@@ -24,8 +24,8 @@ const StyledAvatar = styled("div")(({ theme }) => ({
     theme.palette.mode === "dark"
       ? theme.palette.primary.light
       : theme.palette.primary.main,
-  width: '65px',
-  height: "65px",
+  width: '60px',
+  height: '60px',
   borderRadius: "50%",
   display: "flex",
   alignItems: "center",

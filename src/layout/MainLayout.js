@@ -1,16 +1,14 @@
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import Footer from "components/Footer/Footer";
-import { styled, useTheme } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
 
 import CssBaseline from "@mui/material/CssBaseline";
 import React from "react";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Box } from "@mui/material";
-import { toggleOpen } from "../redux/Slices/Sidebar";
 const Mainlayout = () => {
   const { isOpen, drawerWidth } = useSelector((state) => state.sidebar);
 
