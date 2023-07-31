@@ -17,8 +17,9 @@ const Mainlayout = () => {
   const Main = styled("main")(({ theme }) => ({
     display: "block",
     flexGrow: 1,
-    padding: theme.spacing(3),
     zIndex: 1000,
+    padding: theme.spacing(0, 6, 0, 6),
+    boxShadow: theme.spacing(0),
   }));
 
   return (
@@ -41,8 +42,10 @@ const Mainlayout = () => {
       <Main open={isOpen}>
         <Navbar />
         <Suspense fallback="Loading...">
-          <Outlet />
-          <Footer />
+          <div sx={{ padding: 200 }}>
+            <Outlet />
+            <Footer />
+          </div>
         </Suspense>
       </Main>
     </Box>

@@ -97,6 +97,7 @@ const SidebarComponent = (prop) => {
       theme.palette.mode === "dark"
         ? theme.palette.primary.light
         : theme.palette.primary.main,
+    padding: theme.spacing(4),
     display: "flex",
     justifyContent: "start",
   }));
@@ -139,6 +140,7 @@ const SidebarComponent = (prop) => {
           width: drawerWidth,
           borderRight: 0,
           boxSizing: "border-box",
+          position: "sticky",
         },
       }}
       variant="persistent"
