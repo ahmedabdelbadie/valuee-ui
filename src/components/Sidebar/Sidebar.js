@@ -13,7 +13,7 @@ import {
   Toolbar,
   Box,
 } from "@mui/material";
-import Logo from "../../components/Assets/Images/logo.png";
+import Logo from "../../components/Assets/Images/logo.svg";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { useSelector, useDispatch } from "react-redux";
@@ -97,7 +97,6 @@ const SidebarComponent = (prop) => {
       theme.palette.mode === "dark"
         ? theme.palette.primary.light
         : theme.palette.primary.main,
-    padding: theme.spacing(4),
     display: "flex",
     justifyContent: "start",
   }));
@@ -148,6 +147,8 @@ const SidebarComponent = (prop) => {
       <DrawerHeader>
         <Box
           sx={{
+            minHeight: '100px',
+            minWidth: '200px',
             flexDirection: "row",
             display: "flex",
             justifyContent: "center",
@@ -159,12 +160,13 @@ const SidebarComponent = (prop) => {
               variant="square"
               alt="logo"
               src={Logo}
-              sx={{ minWidth: 60, mr: 5, ml: 3 }}
+              sx={{ minWidth: 150, minHeight: 80, mr: 5, ml: 10 }}
+
             />
           </Link>
-          <Typography variant="logo" component="div">
+          {/* <Typography variant="logo" component="div">
             Value Plus
-          </Typography>
+          </Typography> */}
         </Box>
       </DrawerHeader>
       <Divider />
@@ -175,13 +177,13 @@ const SidebarComponent = (prop) => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          minHeight: 100,
+          minHeight: '100px',
         }}
       >
         <Avatar
           src={avatarb2554d38}
           variant="circular"
-          sx={{ minHeight: 80, minWidth: 80, marginTop: 3 }}
+          sx={{ minHeight: 80, minWidth: 80, marginTop: 3, }}
         />
         <Typography
           variant="logo"

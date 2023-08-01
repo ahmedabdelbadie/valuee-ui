@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardContent, Grid, Typography } from "@mui/material";
+import { Card, CardContent, Grid, Box, Typography } from "@mui/material";
 import { styled, useTheme } from "@mui/material/styles";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 
@@ -19,11 +19,13 @@ const StyledCard = styled(CardContent)(({ theme }) => ({
 }));
 
 const StyledAvatar = styled("div")(({ theme }) => ({
+
   backgroundColor:
     theme.palette.mode === "dark"
       ? theme.palette.primary.light
       : theme.palette.primary.main,
-
+  width: '60px',
+  height: '60px',
   borderRadius: "50%",
   display: "flex",
   alignItems: "center",
@@ -38,7 +40,7 @@ const StyledAvatar = styled("div")(({ theme }) => ({
 const StyledPriceContainer = styled("span")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
-  fontSize: "3rem",
+  fontSize: "1.8rem",
   fontWeight: "bold",
   marginTop: "-10%",
   marginBottom: "10%",
@@ -54,13 +56,13 @@ const StyledDollarIcon = styled("span")(({ theme }) => ({
 
 const SalesTodayTypography = styled(Typography)(({ theme }) => ({
   fontSize: "1.8rem",
-  fontWeight: "bold",
-  marginBottom: "12px",
-  marginTop: "-40px",
+  // fontWeight: "bold",
+  marginBottom: "30px",
+  marginTop: "15px",
   color:
     theme.palette.mode === "light"
-      ? theme.palette.primary.light
-      : theme.palette.primary.dark,
+      ? theme.palette.primary.dark
+      : theme.palette.primary.light,
 }));
 
 const BigCardContainer = styled("div")(({ theme }) => ({
@@ -73,16 +75,16 @@ const BigCardContainer = styled("div")(({ theme }) => ({
     transform: "scale(1.05)",
   },
 }));
-const Icon = styled(LocalShippingIcon)(({ theme }) => ({
-  fontSize: 60,
-  color:
-    theme.palette.mode === "dark"
-      ? theme.palette.primary.dark
-      : theme.palette.primary.light,
-}));
+// const Icon = styled(LocalShippingIcon)(({ theme }) => ({
+//   fontSize: 60,
+//   color:
+//     theme.palette.mode === "dark"
+//       ? theme.palette.primary.dark
+//       : theme.palette.primary.light,
+// }));
 
 const StyledTypography = styled(Typography)(({ theme }) => ({
-  fontSize: "25px",
+  fontSize: "18px",
   color:
     theme.palette.mode === "dark"
       ? theme.palette.primary.light
@@ -91,7 +93,7 @@ const StyledTypography = styled(Typography)(({ theme }) => ({
 
 const PercentageText = styled(Typography)(({ theme }) => ({
   color: "red",
-  fontSize: "25px",
+  fontSize: "20px",
   // color: theme.palette.mode === 'light'
   //     ? theme.palette.primary.light
   //     : theme.palette.primary.dark
@@ -119,11 +121,11 @@ const CardStatus = ({ headTitle, price, type, percentageText }) => {
   return (
     <Card>
       <StyledCard>
-        <Grid container spacing={0} alignItems="center">
-          <Grid item xs>
+        <Box display="flex" alignItems="center">
+          <Box flexGrow={1}>
             <SalesTodayTypography>{headTitle}</SalesTodayTypography>
-          </Grid>
-          <Grid item>
+          </Box>
+          <Box>
             <StyledAvatar
               sx={{
                 backgroundColor: "#2469ce",
@@ -131,8 +133,8 @@ const CardStatus = ({ headTitle, price, type, percentageText }) => {
             >
               {getIcon(type)}
             </StyledAvatar>
-          </Grid>
-        </Grid>
+          </Box>
+        </Box>
         <BigCardContainer>
           <Typography variant="h1" sx={{ mt: 1, mb: 3 }}>
             <StyledPriceContainer>
@@ -141,10 +143,12 @@ const CardStatus = ({ headTitle, price, type, percentageText }) => {
             </StyledPriceContainer>
           </Typography>
         </BigCardContainer>
-        <StyledTypography variant="body1">
-          <PercentageText>{percentageText}</PercentageText> Less sales than
-          usual
-        </StyledTypography>
+        <Box display="flex" alignItems="center" justifyContent='flex-start' mt={1}>
+          <PercentageText>{percentageText}</PercentageText>
+          <Box ml={1}>
+            <StyledTypography variant="body1">Less sales than usual</StyledTypography>
+          </Box>
+        </Box>
       </StyledCard>
     </Card>
   );
