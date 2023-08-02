@@ -17,8 +17,10 @@ import {
 import { Typography, Grid } from "@mui/material";
 import ReactSelect, { components } from "react-select";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import { loginRequest, getTokenRequest } from "../../Api";
+import { loginRequest, getUserById } from "../../Api";
 import { styled } from "@mui/material/styles";
+import jwt_decode from 'jwt-decode';
+
 const Option = (props) => (
   <components.Option {...props}>
     <span>{props.label}</span>
@@ -160,7 +162,7 @@ const PeriodInput = (props) => {
             sx={{ width: "100%" }} // Set full width
             placeholder={placeholder}
             error={Boolean(errorMsg)}
-            // helperText={errorMsg}
+          // helperText={errorMsg}
           />
           {errorMsg && (
             <Typography variant="body2" style={errorStyles}>
@@ -218,17 +220,17 @@ const FormWrapper = styled("div")`
 
 const Login = () => {
   const [form, setForm] = useState({
-    username: "",
+    email: "",
     password: "",
-    company: null,
-    lang: null,
-    branch: null,
-    period: null,
-    rememberPassword: false,
+    // company: null,
+    // lang: null,
+    // branch: null,
+    // period: null,
+    // rememberPassword: false,
   });
 
   const [error, setError] = useState({
-    username: {
+    email: {
       isReq: true,
       errorMsg: "",
     },
@@ -236,22 +238,22 @@ const Login = () => {
       isReq: true,
       errorMsg: "",
     },
-    company: {
-      isReq: true,
-      errorMsg: "",
-    },
-    branch: {
-      isReq: true,
-      errorMsg: "",
-    },
-    lang: {
-      isReq: true,
-      errorMsg: "",
-    },
-    period: {
-      isReq: true,
-      errorMsg: "",
-    },
+    // company: {
+    //   isReq: true,
+    //   errorMsg: "",
+    // },
+    // branch: {
+    //   isReq: true,
+    //   errorMsg: "",
+    // },
+    // lang: {
+    //   isReq: true,
+    //   errorMsg: "",
+    // },
+    // period: {
+    //   isReq: true,
+    //   errorMsg: "",
+    // },
   });
 
   const onValidate = (value, name) => {
@@ -288,18 +290,27 @@ const Login = () => {
   // Handle the login process
   const handleLogin = async (formData) => {
     try {
-      // const loginResponse = await loginRequest(formData);
-      // const token = loginResponse.data.token;
-      // const tokenResponse = await getTokenRequest(token);
-      // const tokenDescription = tokenResponse.data;
-      // console.log(tokenDescription);
-      // // Save the token and token description in local storage
-      // localStorage.setItem("userToken", token);
-      // localStorage.setItem(
-      //   "tokenDescription",
-      //   JSON.stringify(tokenDescription)
-      // );
-    } catch (error) {}
+      console.log(formData);
+      const loginResponse = await loginRequest(formData);
+      console.log('Login response:', loginResponse);
+
+      if (loginResponse.status === 200) {
+        const token = loginResponse.data;
+        console.log('Token:', token);
+
+        const decodedToken = jwt_decode(token);
+
+
+        // Save the token in local storage
+        localStorage.setItem('User data:', decodedToken);
+        console.log('User Data:', decodedToken);
+
+      } else {
+        console.log('Login request failed with status:', loginResponse.status);
+      }
+    } catch (error) {
+      console.error('Error during login:', error);
+    }
   };
 
   // Handle the form submission
@@ -326,7 +337,7 @@ const Login = () => {
           <CardContentWrapper>
             <h1 className="text-center">Login</h1>
             <FormWrapper>
-              <Select
+              {/* <Select
                 name="company"
                 title="company"
                 value={form.company}
@@ -352,16 +363,16 @@ const Login = () => {
                 onValidateFunc={onValidate}
                 placeholderText="Select a date"
                 {...error.period}
-              />
+              /> */}
 
               <TextFieldWrapper>
                 <TextField
                   className="mb-3"
-                  name="username"
-                  placeholder="Username"
-                  value={form.username}
-                  onChange={(e) => onHandleChange(e.target.value, "username")}
-                  error={!!error.username.errorMsg}
+                  name="email"
+                  placeholder="email"
+                  value={form.email}
+                  onChange={(e) => onHandleChange(e.target.value, "email")}
+                  error={!!error.email.errorMsg}
                   required
                   InputProps={{
                     startAdornment: (
@@ -373,10 +384,10 @@ const Login = () => {
                   }}
                   variant="outlined"
                   fullWidth
-                  helperText={error.username.errorMsg}
+                  helperText={error.email.errorMsg}
                 />
-                {error.username.errorMsg && (
-                  <ErrorMessage>Please enter a username</ErrorMessage>
+                {error.email.errorMsg && (
+                  <ErrorMessage>Please enter a email</ErrorMessage>
                 )}
               </TextFieldWrapper>
 
@@ -407,14 +418,14 @@ const Login = () => {
                 )}
               </TextFieldWrapper>
 
-              <Select
+              {/* <Select
                 name="lang"
                 title="Language"
                 value={form.lang}
                 options={languageOptions}
                 onChangeFunc={onHandleChange}
                 {...error.lang}
-              />
+              /> */}
 
               <FormControlLabel
                 control={

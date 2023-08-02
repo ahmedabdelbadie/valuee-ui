@@ -24,6 +24,12 @@ const CompanyList = lazy(
   () => import("../features/Organization/pages/Company/List"),
   "CompanyList"
 );
+
+
+const Login = lazy(
+  () => import("../Services/auth/pages/Login"),
+  "Login"
+);
 const App = () => {
   const theme = useTheme();
   const MainContainer = styled(Box)({
@@ -61,6 +67,7 @@ export const protectedRoutes = [
       { path: "gl/charts", element: <GLCharts /> },
       { path: "organization", element: <Organization /> },
       { path: "company", element: <CompanyList /> },
+      { path: "login", element: <Login /> },
     ],
   },
 ];
