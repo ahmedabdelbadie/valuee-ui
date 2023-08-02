@@ -1,7 +1,13 @@
 import * as React from "react";
 import { ErrorBoundary } from "react-error-boundary";
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from "react-query";
 
-// material-ui
 import { CssBaseline, StyledEngineProvider } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import { BrowserRouter as Router } from "react-router-dom";
@@ -12,7 +18,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 const AppTheme = (props) => {
   const customization = useSelector((state) => state.config);
-
+  const queryClient = new QueryClient();
   return (
     <StyledEngineProvider injectfirst>
       <ThemeProvider theme={theme(customization)}>
@@ -24,7 +30,9 @@ const AppTheme = (props) => {
             }
           >
             <ErrorBoundary FallbackComponent={ErrorFallback}>
-              <Router>{props.children}</Router>
+              <QueryClientProvider client={queryClient}>
+                <Router>{props.children}</Router>
+              </QueryClientProvider>
             </ErrorBoundary>
           </React.Suspense>
         </LocalizationProvider>

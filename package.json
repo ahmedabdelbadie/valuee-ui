@@ -1,5 +1,5 @@
 {
-  "name": "valuee-ui",
+  "name": "value-ui",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -12,6 +12,7 @@
     "@mui/x-data-grid": "^6.10.1",
     "@mui/x-date-pickers": "^6.10.1",
     "@reduxjs/toolkit": "^1.9.5",
+    "@tanstack/react-query": "^4.32.1",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
@@ -21,8 +22,6 @@
     "chart.js": "^4.3.1",
     "chartjs-chart-geo": "^4.2.4",
     "dayjs": "^1.11.9",
-    "eslint": "^8.44.0",
-    "i": "^0.3.7",
     "jsconfig.json": "^2.3.3",
     "npm": "^9.8.1",
     "perfect-scrollbar": "^1.5.5",
@@ -34,9 +33,11 @@
     "react-error-boundary": "^4.0.10",
     "react-perfect-scrollbar": "^1.5.8",
     "react-pro-sidebar": "^1.1.0-alpha.1",
+    "react-query": "^3.39.3",
+    "react-query-auth": "^2.2.0",
     "react-redux": "^8.1.1",
     "react-router-dom": "^6.14.1",
-    "react-scripts": "5.0.1",
+    "react-scripts": "^5.0.1",
     "react-select": "^5.7.4",
     "semantic-ui-react": "^2.1.4",
     "web-vitals": "^2.1.0"
@@ -68,5 +69,10 @@
   },
   "devDependencies": {
     "react-jsconfig": "^1.0.0"
-  }
+  },
+  "description": "Value Erp Plus @Copyrihgt",
+  "main": "index.js",
+  "repository": "https://github.com/ahmedabdelbadie/valuee-ui.git",
+  "author": "ahmedabdelbadie <eng.ahmed9466@gmail.com>",
+  "license": "MIT"
 }

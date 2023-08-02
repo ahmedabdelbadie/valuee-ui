@@ -1,29 +1,39 @@
 import { Suspense, lazy } from "react";
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 
 import MainLayout from "../layout/MainLayout";
 import React from "react";
 import { Box, Container } from "@mui/material";
 import { styled } from "@material-ui/core";
 import { useTheme } from "@mui/material/styles";
+import { lazyImport } from "utils/lazyImport";
 
-const Dashboard = lazy(
-  () => import("../pages/Dashboard/Dashboard"),
+const { Dashboard } = lazyImport(
+  () => import("../features/Dashboard"),
   "Dashboard"
 );
-const GL = lazy(() => import("../pages/General-ledger/General-ledger"), "GL");
-const GLCharts = lazy(
-  () => import("../pages/General-ledger/General-Ledger-Charts"),
-  "GLCharts"
+const { GLRoutes } = lazyImport(
+  () => import("../features/general-ledger"),
+  "GLRoutes"
 );
-const Organization = lazy(
-  () => import("../pages/Organization/Organization"),
-  "Organization"
+
+const { OrganizationRoutes } = lazyImport(
+  () => import("../features/Organization"),
+  "OrganizationRoutes"
 );
-const CompanyList = lazy(
-  () => import("../features/Organization/pages/Company/List"),
-  "CompanyList"
-);
+
+// const GLCharts = lazyImport(
+//   () => import("../pages/General-ledger/General-Ledger-Charts"),
+//   "GLCharts"
+// );
+// const Organization = lazyImport(
+//   () => import("../pages/Organization/Organization"),
+//   "Organization"
+// );
+// const CompanyList = lazyImport(
+//   () => import("../features/Organization/pages/Company/List"),
+//   "CompanyList"
+// );
 const App = () => {
   const theme = useTheme();
   const MainContainer = styled(Box)({
@@ -55,12 +65,14 @@ export const protectedRoutes = [
     path: "/",
     element: <App />,
     children: [
-      { path: "", element: <Dashboard /> },
-      { path: "dashboard", element: <Dashboard /> },
-      { path: "general-ledger", element: <GL /> },
-      { path: "gl/charts", element: <GLCharts /> },
-      { path: "organization", element: <Organization /> },
-      { path: "company", element: <CompanyList /> },
+      { path: "/dashboard", element: <Dashboard /> },
+      { path: "/general-ledger/*", element: <GLRoutes /> },
+      { path: "/organization/*", element: <OrganizationRoutes /> },
+      // { path: "general-ledger", element: <GL /> },
+      // { path: "gl/charts", element: <GLCharts /> },
+      // { path: "organization", element: <Organization /> },
+      // { path: "company", element: <CompanyList /> },
+      { path: "*", element: <Navigate to="." /> },
     ],
   },
 ];

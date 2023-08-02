@@ -1,5 +1,4 @@
 import {
-  Link,
   ListItemButton,
   Drawer,
   List,
@@ -13,6 +12,7 @@ import {
   Toolbar,
   Box,
 } from "@mui/material";
+import { Link } from "react-router-dom";
 import Logo from "../../components/Assets/Images/logo.png";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
@@ -154,7 +154,7 @@ const SidebarComponent = (prop) => {
             alignItems: "center",
           }}
         >
-          <Link href="/">
+          <Link to="/">
             <Avatar
               variant="square"
               alt="logo"
@@ -221,7 +221,7 @@ const SidebarComponent = (prop) => {
           </Typography>
         </ListItem>
         <ListItem key={1} disablePadding>
-          <Link href="dashboard">
+          <Link to="dashboard">
             <ListItemButton>
               <ListItemIcon>{getIcon("Dashboard")}</ListItemIcon>
               <ListItemText
@@ -258,7 +258,7 @@ const SidebarComponent = (prop) => {
           >
             <List component="div">
               <ListItem key={0} disablePadding>
-                <Link href="company">
+                <Link to={`organization/company`}>
                   <ListItemButton sx={{ pl: 4 }} onClick={handleGLMFToggle}>
                     <ListItemIcon>{getIcon("Companies")}</ListItemIcon>
                     <ListItemText primary="Companies" />
@@ -266,7 +266,7 @@ const SidebarComponent = (prop) => {
                 </Link>
               </ListItem>
               <ListItem key={1} disablePadding>
-                <Link href="branch">
+                <Link to={`organization/branch`}>
                   <ListItemButton sx={{ pl: 4 }} onClick={handleGLMFToggle}>
                     <ListItemIcon>{getIcon("Branches")}</ListItemIcon>
                     <ListItemText primary="Branches" />
@@ -325,7 +325,7 @@ const SidebarComponent = (prop) => {
                 >
                   <List component="div" disablePadding>
                     <ListItem key={0} disablePadding>
-                      <Link href="gl/charts">
+                      <Link to={`general-ledger/master-files/chart`}>
                         <ListItemButton sx={{ pl: 6 }}>
                           <ListItemIcon>
                             {getIcon("General Ledger Chart")}
@@ -335,7 +335,9 @@ const SidebarComponent = (prop) => {
                       </Link>
                     </ListItem>
                     <ListItem key={0} disablePadding>
-                      <Link href="gl/consolidated-chart">
+                      <Link
+                        to={`general-ledger/master-files/consolidated-chart`}
+                      >
                         <ListItemButton sx={{ pl: 6 }}>
                           <ListItemIcon>
                             {getIcon("General Consolidated Chart")}
@@ -345,10 +347,11 @@ const SidebarComponent = (prop) => {
                       </Link>
                     </ListItem>
                     <ListItem key={0} disablePadding>
-                      <ListItemButton sx={{ pl: 6 }} onClick={handleCSToggle}>
-                        <ListItemIcon>{getIcon("Cost Centers")}</ListItemIcon>
-                        <ListItemText primary="Cost Centers" />
-                        <ExpandLess
+                      <Link to={`general-ledger/master-files/cost-center`}>
+                        <ListItemButton sx={{ pl: 6 }} onClick={handleCSToggle}>
+                          <ListItemIcon>{getIcon("Cost Centers")}</ListItemIcon>
+                          <ListItemText primary="Cost Centers" />
+                          {/* <ExpandLess
                           sx={[
                             {
                               transform: "rotate(90deg)",
@@ -356,9 +359,10 @@ const SidebarComponent = (prop) => {
                             },
                             isOpenCS && { transform: "rotate(180deg)" },
                           ]}
-                        />
-                      </ListItemButton>
-                      <Collapse
+                        />*/}
+                        </ListItemButton>
+                      </Link>
+                      {/* <Collapse
                         in={isOpenCS}
                         timeout="auto"
                         unmountOnExit
@@ -366,7 +370,7 @@ const SidebarComponent = (prop) => {
                       >
                         <List component="div" disablePadding>
                           <ListItem key={0} disablePadding>
-                            <Link href={`gl/cost-center/:1`}>
+                            <Link to={`general-ledger/consolidated-chart`}>
                               <ListItemButton sx={{ pl: 8 }}>
                                 <ListItemIcon>
                                   {getIcon("Cost Center")}
@@ -376,7 +380,7 @@ const SidebarComponent = (prop) => {
                             </Link>
                           </ListItem>
                           <ListItem key={0} disablePadding>
-                            <Link href={`gl/cost-center/:2`}>
+                            <Link to={`gl/cost-center/:2`}>
                               <ListItemButton sx={{ pl: 8 }}>
                                 <ListItemIcon>
                                   {getIcon("Cost Center")}
@@ -386,10 +390,10 @@ const SidebarComponent = (prop) => {
                             </Link>
                           </ListItem>
                         </List>
-                      </Collapse>
+                      </Collapse> */}
                     </ListItem>
                     <ListItem key={0} disablePadding>
-                      <Link href="gl/projects">
+                      <Link to="general-ledger/master-files/project">
                         <ListItemButton sx={{ pl: 6 }}>
                           <ListItemIcon>{getIcon("Projects")}</ListItemIcon>
                           <ListItemText primary="Projects" />
@@ -423,7 +427,7 @@ const SidebarComponent = (prop) => {
                 >
                   <List component="div" disablePadding>
                     <ListItem key={0} disablePadding>
-                      <Link href={`gl/journal-entries`}>
+                      <Link to={`general-ledger/transactions/journal-entries`}>
                         <ListItemButton sx={{ pl: 6 }}>
                           <ListItemIcon>
                             {getIcon("Journal Entries")}
@@ -433,7 +437,9 @@ const SidebarComponent = (prop) => {
                       </Link>
                     </ListItem>
                     <ListItem key={0} disablePadding>
-                      <Link href={`gl/pre-payment`}>
+                      <Link
+                        to={`general-ledger/transactions/pre-payment-and-accrual-entry`}
+                      >
                         <ListItemButton sx={{ pl: 6 }}>
                           <ListItemIcon>
                             {getIcon("Pre Payment and Accrual Entry")}
@@ -469,7 +475,9 @@ const SidebarComponent = (prop) => {
                 >
                   <List component="div" disablePadding>
                     <ListItem key={0} disablePadding>
-                      <Link href={`gl/accounts-details-queries`}>
+                      <Link
+                        to={`general-ledger/queries/accounts-details-queries`}
+                      >
                         <ListItemButton sx={{ pl: 6 }}>
                           <ListItemIcon>
                             {getIcon("Accounts Details Queries")}
@@ -482,7 +490,7 @@ const SidebarComponent = (prop) => {
                 </Collapse>
               </ListItem>
               <ListItem key={0} disablePadding>
-                <Link href={`gl/reports`}>
+                <Link to={`general-ledger/reports`}>
                   <ListItemButton sx={{ pl: 4 }}>
                     <ListItemIcon>
                       {getIcon("General Ledger Reports")}
