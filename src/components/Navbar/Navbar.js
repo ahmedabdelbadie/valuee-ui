@@ -13,7 +13,7 @@ import {
   Switch,
   FormControlLabel,
 } from "@mui/material";
-import { AccountCircle, ExitToApp } from "@mui/icons-material";
+
 import MuiAppBar from "@mui/material/AppBar";
 import { styled } from "@mui/material/styles";
 import {

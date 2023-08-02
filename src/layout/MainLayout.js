@@ -7,7 +7,6 @@ import { Outlet } from "react-router-dom";
 
 import CssBaseline from "@mui/material/CssBaseline";
 import React from "react";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import { useDispatch, useSelector } from "react-redux";
 import { Box } from "@mui/material";
 import { toggleOpen } from "../redux/Slices/Sidebar";
