@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Table } from "semantic-ui-react";
+import React, { Component } from 'react';
+import { Table } from 'semantic-ui-react';
 
 // import ModalUser from "../ModalUser/ModalUser";
 // import ModalConfirmDelete from "../ModalConfirmDelete/ModalConfirmDelete";

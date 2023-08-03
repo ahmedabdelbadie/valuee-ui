@@ -1,64 +1,49 @@
-// import { initReactQueryAuth } from "react-query-auth";
-import { configureAuth } from "react-query-auth";
-import { Spinner } from "./../components/Spinner";
-import { loginWithEmailAndPassword } from "../features/auth";
-import storage from "../utils/storage";
+import { configureAuth } from 'react-query-auth';
 
-async function handleUserResponse(data) {
-  const { jwt, user } = data;
-  storage.setToken(jwt);
-  return user;
+import { loginWithEmailAndPassword } from '../features/auth';
+import storage from '../utils/storage';
+
+async function handleUserResponse(responseData) {
+  //TODO Get Id And save it on local storage
+  const { data } = responseData;
+  const userId = null;
+  storage.setToken({ token: data, userId: userId });
+  return { userName: 'ahmed' }; //await getUser({ userId: userId });
 }
 
-async function loadUser() {
-  //   if (storage.getToken()) {
-  //     const data = await getUser();
-  //     return data;
-  //   }
-  //   return null;
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve("user data");
-    }, 100);
-  });
-}
+const userFn = async () => {
+  const token = storage.getToken();
+  if (token) {
+    const data = { userName: 'ahmed' }; //TODO Implement User await getUser();
+    return data;
+  }
+  return null;
+};
 
-async function loginFn(data) {
-  const response = await loginWithEmailAndPassword(data);
-  const user = await handleUserResponse(response);
-  return user;
-}
+const loginFn = async (data) => {
+  return loginWithEmailAndPassword(data)
+    .then((response) => {
+      return handleUserResponse(response);
+    })
+    .catch(() => null);
+};
 
-async function registerFn(data) {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve("user has been register");
-    }, 100);
-  });
+const registerFn = async (data) => {
+  //TODO Implement Register Function
   //   const response = await registerWithEmailAndPassword(data);
   //   const user = await handleUserResponse(response);
   //   return user;
-}
-
-async function logoutFn() {
-  storage.clearToken();
-  window.location.assign(window.location.origin);
-}
-
-const authConfig = {
-  loadUser,
-  loginFn,
-  registerFn,
-  logoutFn,
-  LoaderComponent() {
-    return (
-      <div className="w-screen h-screen flex justify-center items-center">
-        <Spinner size="xl" />
-      </div>
-    );
-  },
+  return data;
 };
 
-export const { useUser, useLogin, useRegister, useLogout } = configureAuth(
-  authConfig
-);
+const logoutFn = () => {
+  storage.clearToken();
+  window.location.assign(window.location.origin);
+};
+
+export const { useUser, useLogin, useRegister, useLogout } = configureAuth({
+  userFn,
+  loginFn,
+  registerFn,
+  logoutFn
+});

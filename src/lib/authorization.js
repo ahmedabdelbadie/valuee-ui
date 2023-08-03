@@ -1,30 +1,30 @@
-import * as React from "react";
+import * as React from 'react';
 
-import { useAuth } from "./auth";
+import { useAuth } from './auth';
 export const ROLES = Object.freeze({
-  ADMIN: Symbol("ADMIN"),
-  USER: Symbol("USER"),
+  ADMIN: Symbol('ADMIN'),
+  USER: Symbol('USER')
 });
 
 export const POLICIES = {
-  "comment:delete": (user, comment) => {
-    if (user.role === "ADMIN") {
+  'comment:delete': (user, comment) => {
+    if (user.role === 'ADMIN') {
       return true;
     }
 
-    if (user.role === "USER" && comment.authorId === user.id) {
+    if (user.role === 'USER' && comment.authorId === user.id) {
       return true;
     }
 
     return false;
-  },
+  }
 };
 
 export const useAuthorization = () => {
   const { user } = useAuth();
 
   if (!user) {
-    throw Error("User does not exist!");
+    throw Error('User does not exist!');
   }
 
   const checkAccess = React.useCallback(
@@ -45,7 +45,7 @@ export const Authorization = ({
   policyCheck,
   allowedRoles,
   forbiddenFallback = null,
-  children,
+  children
 }) => {
   const { checkAccess } = useAuthorization();
 
@@ -55,7 +55,7 @@ export const Authorization = ({
     canAccess = checkAccess({ allowedRoles });
   }
 
-  if (typeof policyCheck !== "undefined") {
+  if (typeof policyCheck !== 'undefined') {
     canAccess = policyCheck;
   }
 

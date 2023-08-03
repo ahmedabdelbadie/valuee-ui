@@ -1,182 +1,35 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-
-import { forwardRef } from 'react';
-import { Card, CardContent, CardHeader, Divider, Typography } from '@mui/material';
-// material-ui
-import { Collapse, Fade, Box, Grow, Slide, Zoom } from '@mui/material';
 // material-ui
 import { useTheme } from '@mui/material/styles';
 import {
   Avatar,
+  Box,
   Button,
   ButtonBase,
   CardActions,
   Chip,
   ClickAwayListener,
+  Divider,
   Grid,
   Paper,
   Popper,
   Stack,
   TextField,
+  Typography,
   useMediaQuery
 } from '@mui/material';
-
 // third-party
 import PerfectScrollbar from 'react-perfect-scrollbar';
-
+// project imports
+import MainCard from './MainCard';
+import Transitions from './Transitions';
 import NotificationList from './NotificationList';
 
 // assets
 import { Notifications } from '@mui/icons-material';
-// constant
-const headerSX = {
-  '& .MuiCardHeader-action': { mr: 0 }
-};
 
-// ==============================|| CUSTOM MAIN CARD ||============================== //
-
-const MainCard = forwardRef(
-  (
-    {
-      zIndex = 100, // Set the default value for zIndex
-      border = true,
-      boxShadow,
-      children,
-      content = true,
-      contentClass = '',
-      contentSX = {},
-      darkTitle,
-      secondary,
-      shadow,
-      sx = {},
-      title,
-      ...others
-    },
-    ref
-  ) => {
-    const theme = useTheme();
-
-    return (
-      <Card
-        ref={ref}
-        {...others}
-        sx={{
-          border: border ? '1px solid' : 'none',
-          borderColor: theme.palette.primary[200] + 25,
-          ':hover': {
-            boxShadow: boxShadow ? shadow || '0 2px 14px 0 rgb(32 40 45 / 8%)' : 'inherit'
-          },
-          ...sx
-        }}
-      >
-        {/* card header and action */}
-        {title && (
-          <CardHeader
-            sx={headerSX}
-            title={darkTitle ? <Typography variant="h3">{title}</Typography> : title}
-            action={secondary}
-          />
-        )}
-
-        {/* content & header divider */}
-        {title && <Divider />}
-
-        {/* card content */}
-        {content && (
-          <CardContent sx={contentSX} className={contentClass}>
-            {children}
-          </CardContent>
-        )}
-        {!content && children}
-      </Card>
-    );
-  }
-);
-const Transitions = forwardRef(({ children, position, type, direction, ...others }, ref) => {
-  let positionSX = {
-    transformOrigin: '0 0 0'
-  };
-
-  switch (position) {
-    case 'top-right':
-      positionSX = {
-        transformOrigin: 'top right'
-      };
-      break;
-    case 'top':
-      positionSX = {
-        transformOrigin: 'top'
-      };
-      break;
-    case 'bottom-left':
-      positionSX = {
-        transformOrigin: 'bottom left'
-      };
-      break;
-    case 'bottom-right':
-      positionSX = {
-        transformOrigin: 'bottom right'
-      };
-      break;
-    case 'bottom':
-      positionSX = {
-        transformOrigin: 'bottom'
-      };
-      break;
-    case 'top-left':
-    default:
-      positionSX = {
-        transformOrigin: '0 0 0'
-      };
-      break;
-  }
-
-  return (
-    <Box ref={ref}>
-      {type === 'grow' && (
-        <Grow {...others}>
-          <Box sx={positionSX}>{children}</Box>
-        </Grow>
-      )}
-      {type === 'collapse' && (
-        <Collapse {...others} sx={positionSX}>
-          {children}
-        </Collapse>
-      )}
-      {type === 'fade' && (
-        <Fade
-          {...others}
-          timeout={{
-            appear: 500,
-            enter: 600,
-            exit: 400
-          }}
-        >
-          <Box sx={positionSX}>{children}</Box>
-        </Fade>
-      )}
-      {type === 'slide' && (
-        <Slide
-          {...others}
-          timeout={{
-            appear: 0,
-            enter: 400,
-            exit: 200
-          }}
-          direction={direction}
-        >
-          <Box sx={positionSX}>{children}</Box>
-        </Slide>
-      )}
-      {type === 'zoom' && (
-        <Zoom {...others}>
-          <Box sx={positionSX}>{children}</Box>
-        </Zoom>
-      )}
-    </Box>
-  );
-});
+// notification status options
 const status = [
   {
     value: 'all',
@@ -358,6 +211,7 @@ const NotificationSection = () => {
                             <Divider sx={{ my: 0 }} />
                           </Grid>
                         </Grid>
+
                         <NotificationList />
                       </PerfectScrollbar>
                     </Grid>

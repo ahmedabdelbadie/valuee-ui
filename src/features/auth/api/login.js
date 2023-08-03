@@ -1,5 +1,5 @@
-import { axios } from "../../../lib/axios";
+import { axios } from '../../../lib/axios';
 
-export const loginWithEmailAndPassword = (data) => {
-  return axios.post("/Auth/Login", data);
+export const loginWithEmailAndPassword = async (data) => {
+  return axios.post('/Auth/Login', data);
 };

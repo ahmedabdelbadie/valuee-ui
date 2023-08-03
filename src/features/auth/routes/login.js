@@ -1,13 +1,13 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
-import { LoginForm } from "../components/LoginForm";
+import { LoginForm } from '../components/LoginForm';
 
 export const Login = () => {
   const navigate = useNavigate();
 
   return (
     <>
-      <LoginForm onSuccess={() => navigate("/app")} />
+      <LoginForm onSuccess={() => navigate('/app')} />
     </>
   );
 };

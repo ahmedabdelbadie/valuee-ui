@@ -1,217 +1,57 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback } from 'react';
 import {
   TextField,
   Button,
   FormControlLabel,
   Checkbox,
   Card,
-  CardActions,
-} from "@material-ui/core";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import LockOpenIcon from "@mui/icons-material/LockOpen";
-import {
-  companyOptions,
-  branchOptions,
-  languageOptions,
-} from "./selectOptions";
-import { Typography, Grid } from "@mui/material";
-import ReactSelect, { components } from "react-select";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-// import { loginRequest, getUserById } from "../../Api";
-import { styled } from "@mui/material/styles";
-// import jwt_decode from "jwt-decode";
+  CardActions
+} from '@material-ui/core';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import LockOpenIcon from '@mui/icons-material/LockOpen';
 
-const Option = (props) => (
-  <components.Option {...props}>
-    <span>{props.label}</span>
-  </components.Option>
-);
+import { styled } from '@mui/material/styles';
 
-// Custom Control component to render input with icon
-const Control = ({ children, ...props }) => {
-  const selectedValue = props.selectProps.value;
+import { useLogin } from '../../../lib/auth';
 
-  return (
-    <components.Control {...props}>
-      <span className={`control-icon ${selectedValue ? "selected" : ""}`}>
-        <CheckCircleIcon
-          style={{ color: selectedValue ? "#09A409" : "#000" }}
-        />
-      </span>
-      {children}
-    </components.Control>
-  );
-};
-const Select = (props) => {
-  const [isInteracted, setIsInteracted] = useState(true); // State variable to track interaction
-  const [borderstat, setborderstat] = useState("red");
+const Container = styled('div')({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  height: '100vh',
+  backgroundColor: '#f0f0f0'
+});
 
-  const changeHandler = (e, props) => {
-    let value = null;
-    if (e) value = e.value;
-    props.onChangeFunc(value, props.name, e);
-    if (!props.onValidateFunc) return;
+const CardContainer = styled('div')({
+  width: '50%',
+  maxWidth: '500px',
+  '@media (max-width: 600px)': {
+    width: '90%'
+  }
+});
 
-    let msg = null;
-    if (!value && props.isReq && isInteracted) {
-      msg = `Please select ${props.title}.`;
-    }
+const CardContentWrapper = styled('div')({
+  width: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center'
+});
 
-    props.onValidateFunc(msg, props.name);
-  };
+const TextFieldWrapper = styled('div')({
+  marginBottom: '1rem',
+  width: '100%'
+});
 
-  const inputProps = {
-    name: props.name,
-    placeholder: props.placeholder || `Select ${props.title}`,
-    className: props.className,
-    isClearable: props.isClearable,
-    value: props.options.find((x) => x.value === props.value),
-    options: props.options,
+const ErrorMessage = styled('div')({
+  color: 'red'
+});
 
-    styles: {
-      control: (provided, state) => {
-        const height = "55px"; // Adjust the height value as needed
-        const borderColor = props.errorMsg ? borderstat : provided.borderColor;
+const CardActionsStyled = styled(CardActions)({
+  color: 'red',
+  justifyContent: 'center'
+});
 
-        return { ...provided, borderColor, height };
-      },
-    },
-    components: {
-      Option,
-      Control,
-    },
-  };
-
-  const isError = props.errorMsg && props.errorMsg !== true;
-
-  const handleSelectFocus = () => {
-    if (props.value) {
-      setIsInteracted(false);
-      setborderstat("green");
-    }
-  };
-
-  return (
-    <div className={`mb-4 ${isError ? "has-error" : ""}`}>
-      <label className="form-label">{props.title}</label>
-
-      <ReactSelect
-        {...inputProps}
-        onChange={(e) => changeHandler(e, props)}
-        onFocus={handleSelectFocus}
-        className={isError ? "react-select-error" : ""}
-      />
-      {props.errorMsg && isInteracted && (
-        <span className="text-danger" style={{ color: "red" }}>
-          {props.errorMsg === true
-            ? `Please select ${props.title}.`
-            : props.errorMsg}
-        </span>
-      )}
-    </div>
-  );
-};
-const PeriodInput = (props) => {
-  const {
-    name,
-    title,
-    value,
-    onChangeFunc,
-    isReq,
-    onValidateFunc,
-    errorMsg,
-    placeholder,
-  } = props;
-
-  const handleDateChange = (event) => {
-    onChangeFunc(event.target.value, name);
-    if (onValidateFunc) {
-      const msg = !event.target.value && isReq ? `Please select ${title}.` : "";
-      onValidateFunc(msg, name);
-    }
-  };
-
-  const containerStyles = {
-    marginBottom: "1rem",
-  };
-
-  const labelStyles = {
-    marginBottom: "0.5rem",
-  };
-
-  const errorStyles = {
-    color: "red",
-    fontSize: "0.8rem",
-    marginTop: "0.25rem",
-  };
-
-  return (
-    <div style={containerStyles}>
-      <Typography variant="subtitle1" style={labelStyles}>
-        {title}
-      </Typography>
-      <Grid container alignItems="center" spacing={2} className="mb-3">
-        <Grid item xs={12}>
-          <TextField
-            id={name}
-            name={name}
-            type="date"
-            value={value}
-            onChange={handleDateChange}
-            variant="outlined"
-            sx={{ width: "100%" }} // Set full width
-            placeholder={placeholder}
-            error={Boolean(errorMsg)}
-            // helperText={errorMsg}
-          />
-          {errorMsg && (
-            <Typography variant="body2" style={errorStyles}>
-              {errorMsg === true ? `Please select ${title}.` : errorMsg}
-            </Typography>
-          )}
-        </Grid>
-      </Grid>
-    </div>
-  );
-};
-const Container = styled("div")(({ theme }) => ({
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  height: "100vh",
-  backgroundColor: "#f0f0f0",
-}));
-
-const CardContainer = styled("div")(({ theme }) => ({
-  width: "50%",
-  maxWidth: "500px",
-  "@media (max-width: 600px)": {
-    width: "90%",
-  },
-}));
-
-const CardContentWrapper = styled("div")(({ theme }) => ({
-  width: "100%",
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-}));
-
-const TextFieldWrapper = styled("div")(({ theme }) => ({
-  marginBottom: "1rem",
-  width: "100%",
-}));
-
-const ErrorMessage = styled("div")(({ theme }) => ({
-  color: "red",
-}));
-
-const CardActionsStyled = styled(CardActions)(({ theme }) => ({
-  color: "red",
-  justifyContent: "center",
-}));
-
-const FormWrapper = styled("div")`
+const FormWrapper = styled('div')`
   width: 90%;
   margin-bottom: 1rem;
   display: flex;
@@ -220,8 +60,8 @@ const FormWrapper = styled("div")`
 
 export const Login = () => {
   const [form, setForm] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: ''
     // company: null,
     // lang: null,
     // branch: null,
@@ -232,12 +72,12 @@ export const Login = () => {
   const [error, setError] = useState({
     email: {
       isReq: true,
-      errorMsg: "",
+      errorMsg: ''
     },
     password: {
       isReq: true,
-      errorMsg: "",
-    },
+      errorMsg: ''
+    }
     // company: {
     //   isReq: true,
     //   errorMsg: "",
@@ -259,17 +99,17 @@ export const Login = () => {
   const onValidate = (value, name) => {
     setError((prev) => ({
       ...prev,
-      [name]: { ...prev[name], errorMsg: value },
+      [name]: { ...prev[name], errorMsg: value }
     }));
   };
 
   const onHandleChange = useCallback((value, name) => {
     setForm((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: value
     }));
 
-    onValidate("", name);
+    onValidate('', name);
   }, []);
 
   const validateForm = () => {
@@ -287,29 +127,7 @@ export const Login = () => {
     return !isInvalid;
   };
 
-  // Handle the login process
-  const handleLogin = async (formData) => {
-    try {
-      console.log(formData);
-      // const loginResponse = await loginRequest(formData);
-      // console.log("Login response:", loginResponse);
-
-      // if (loginResponse.status === 200) {
-      //   const token = loginResponse.data;
-      //   console.log("Token:", token);
-
-      //   const decodedToken = jwt_decode(token);
-
-      //   // Save the token in local storage
-      //   localStorage.setItem("User data:", decodedToken);
-      //   console.log("User Data:", decodedToken);
-      // } else {
-      //   console.log("Login request failed with status:", loginResponse.status);
-      // }
-    } catch (error) {
-      console.error("Error during login:", error);
-    }
-  };
+  const login = useLogin();
 
   // Handle the form submission
   const handleSubmit = async (event) => {
@@ -317,14 +135,14 @@ export const Login = () => {
 
     const isValid = validateForm();
     if (!isValid) {
-      console.error("Invalid Form!");
+      console.error('Invalid Form!');
       return;
     }
 
     try {
-      await handleLogin(form);
+      login.mutate(form);
     } catch (error) {
-      console.error("Error during login:", error);
+      console.error('Error during login:', error);
     }
   };
 
@@ -369,24 +187,22 @@ export const Login = () => {
                   name="email"
                   placeholder="email"
                   value={form.email}
-                  onChange={(e) => onHandleChange(e.target.value, "email")}
+                  onChange={(e) => onHandleChange(e.target.value, 'email')}
                   error={!!error.email.errorMsg}
                   required
                   InputProps={{
                     startAdornment: (
-                      <div style={{ marginRight: "8px" }}>
+                      <div style={{ marginRight: '8px' }}>
                         <AccountCircleIcon />
                       </div>
                     ),
-                    style: { fontSize: "16px", color: "black" },
+                    style: { fontSize: '16px', color: 'black' }
                   }}
                   variant="outlined"
                   fullWidth
                   helperText={error.email.errorMsg}
                 />
-                {error.email.errorMsg && (
-                  <ErrorMessage>Please enter a email</ErrorMessage>
-                )}
+                {error.email.errorMsg && <ErrorMessage>Please enter a email</ErrorMessage>}
               </TextFieldWrapper>
 
               <TextFieldWrapper>
@@ -395,25 +211,23 @@ export const Login = () => {
                   name="password"
                   placeholder="Password"
                   value={form.password}
-                  onChange={(e) => onHandleChange(e.target.value, "password")}
+                  onChange={(e) => onHandleChange(e.target.value, 'password')}
                   error={!!error.password.errorMsg}
                   required
                   type="password"
                   InputProps={{
                     startAdornment: (
-                      <div style={{ marginRight: "8px" }}>
+                      <div style={{ marginRight: '8px' }}>
                         <LockOpenIcon />
                       </div>
                     ),
-                    style: { fontSize: "16px", color: "black" },
+                    style: { fontSize: '16px', color: 'black' }
                   }}
                   variant="outlined"
                   fullWidth
                   helperText={error.password.errorMsg}
                 />
-                {error.password.errorMsg && (
-                  <ErrorMessage>Please enter password</ErrorMessage>
-                )}
+                {error.password.errorMsg && <ErrorMessage>Please enter password</ErrorMessage>}
               </TextFieldWrapper>
 
               {/* <Select
@@ -429,9 +243,7 @@ export const Login = () => {
                 control={
                   <Checkbox
                     checked={form.rememberPassword}
-                    onChange={(e) =>
-                      onHandleChange(e.target.checked, "rememberPassword")
-                    }
+                    onChange={(e) => onHandleChange(e.target.checked, 'rememberPassword')}
                     name="rememberPassword"
                     color="primary"
                   />
@@ -441,7 +253,7 @@ export const Login = () => {
             </FormWrapper>
           </CardContentWrapper>
           <CardActionsStyled>
-            {" "}
+            {' '}
             {/* Using the styled CardActions here */}
             <Button variant="contained" color="primary" onClick={handleSubmit}>
               Submit

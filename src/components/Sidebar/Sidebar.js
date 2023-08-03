@@ -10,74 +10,73 @@ import {
   Avatar,
   Typography,
   Toolbar,
-  Box,
-} from "@mui/material";
-import { Link } from "react-router-dom";
-import Logo from "../../components/Assets/Images/logo.png";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import { useSelector, useDispatch } from "react-redux";
-
-import { toggleOpen } from "../../redux/Slices/Sidebar";
-import { styled, useTheme } from "@mui/material/styles";
-import sidebarData from "../../Services/Static/sidebardata";
-import { Analytics as AnalyticsIcon } from "@mui/icons-material";
-import HomeIcon from "@mui/icons-material/Home";
-import ExpandLess from "@mui/icons-material/ExpandLess";
-import ExpandMore from "@mui/icons-material/ExpandMore";
-import Collapse from "@mui/material/Collapse";
-import { useState } from "react";
-import DriveFolderUploadIcon from "@mui/icons-material/DriveFolderUpload";
-import InsertChartIcon from "@mui/icons-material/InsertChart";
-import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
-import BarChartIcon from "@mui/icons-material/BarChart";
-import CallSplitIcon from "@mui/icons-material/CallSplit";
-import WarehouseIcon from "@mui/icons-material/Warehouse";
-import HouseIcon from "@mui/icons-material/House";
-import EmojiObjectsIcon from "@mui/icons-material/EmojiObjects";
-import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
-import DoorSlidingIcon from "@mui/icons-material/DoorSliding";
-import PinchIcon from "@mui/icons-material/Pinch";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import BusinessIcon from "@mui/icons-material/Business";
-import ApartmentIcon from "@mui/icons-material/Apartment";
-import avatarb2554d38 from "../Assets/Images/avatar.b2554d38.jpg";
-import useMediaQuery from "@mui/material/useMediaQuery";
+  Box
+} from '@mui/material';
+import { Link } from 'react-router-dom';
+import { LogoIcon } from '../../components/Assets/Images/LogoIcon.js';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import { useSelector, useDispatch } from 'react-redux';
+import { SvgIcon } from '@mui/material';
+import { toggleOpen } from '../../redux/Slices/Sidebar';
+import { styled, useTheme } from '@mui/material/styles';
+import { Analytics as AnalyticsIcon } from '@mui/icons-material';
+import HomeIcon from '@mui/icons-material/Home';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
+import Collapse from '@mui/material/Collapse';
+import { useState } from 'react';
+import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload';
+import InsertChartIcon from '@mui/icons-material/InsertChart';
+import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
+import BarChartIcon from '@mui/icons-material/BarChart';
+import CallSplitIcon from '@mui/icons-material/CallSplit';
+import WarehouseIcon from '@mui/icons-material/Warehouse';
+import HouseIcon from '@mui/icons-material/House';
+import EmojiObjectsIcon from '@mui/icons-material/EmojiObjects';
+import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
+import DoorSlidingIcon from '@mui/icons-material/DoorSliding';
+import PinchIcon from '@mui/icons-material/Pinch';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import BusinessIcon from '@mui/icons-material/Business';
+import ApartmentIcon from '@mui/icons-material/Apartment';
+import avatarb2554d38 from '../Assets/Images/avatar.b2554d38.jpg';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const getIcon = (name) => {
   switch (name) {
-    case "Branches":
+    case 'Branches':
       return <BusinessIcon />;
-    case "Companies":
+    case 'Companies':
       return <ApartmentIcon />;
-    case "Organization":
+    case 'Organization':
       return <HomeIcon />;
-    case "Dashboard":
+    case 'Dashboard':
       return <DashboardIcon />;
-    case "General Ledger Reports":
+    case 'General Ledger Reports':
       return <InsertChartIcon />;
-    case "General Ledger":
+    case 'General Ledger':
       return <LibraryBooksIcon />;
-    case "General Ledger Master Files":
+    case 'General Ledger Master Files':
       return <DriveFolderUploadIcon />;
-    case "General Ledger Transactions":
+    case 'General Ledger Transactions':
       return <DriveFolderUploadIcon />;
-    case "General Ledger Queries":
+    case 'General Ledger Queries':
       return <DriveFolderUploadIcon />;
-    case "General Ledger Chart":
+    case 'General Ledger Chart':
       return <BarChartIcon />;
-    case "General Consolidated Chart":
+    case 'General Consolidated Chart':
       return <CallSplitIcon />;
-    case "Cost Centers":
+    case 'Cost Centers':
       return <WarehouseIcon />;
-    case "Cost Center":
+    case 'Cost Center':
       return <HouseIcon />;
-    case "Projects":
+    case 'Projects':
       return <EmojiObjectsIcon />;
 
-    case "Journal Entries":
+    case 'Journal Entries':
       return <DoorSlidingIcon />;
-    case "Pre Payment and Accrual Entry":
+    case 'Pre Payment and Accrual Entry':
       return <PinchIcon />;
     default:
       return <HomeIcon />;
@@ -92,16 +91,15 @@ const SidebarComponent = (prop) => {
   const [isOpenGLQ, setOpenGLQ] = useState(false);
   const [isOpenOr, setOpenOr] = useState(false);
 
-  const DrawerHeader = styled("div")(({ theme }) => ({
+  const DrawerHeader = styled('div')(({ theme }) => ({
     backgroundColor:
-      theme.palette.mode === "dark"
-        ? theme.palette.primary.light
-        : theme.palette.primary.main,
+      theme.palette.mode === 'dark' ? theme.palette.primary.light : theme.palette.primary.main,
     padding: theme.spacing(4),
-    display: "flex",
-    justifyContent: "start",
+    display: 'flex',
+    justifyContent: 'start'
   }));
   const { isOpen, drawerWidth } = useSelector((state) => state.sidebar);
+  const { isLight } = useSelector((state) => state.config);
 
   const dispatch = useDispatch();
   const handleToggle = () => {
@@ -129,53 +127,43 @@ const SidebarComponent = (prop) => {
   return (
     <Drawer
       open={isOpen}
-      anchor={"left"}
+      anchor={'left'}
       transitionDuration={{
         enter: 2000,
-        exit: 2000,
+        exit: 2000
       }}
       sx={{
         width: drawerWidth,
-        "& .MuiDrawer-paper": {
+        '& .MuiDrawer-paper': {
           width: drawerWidth,
           borderRight: 0,
-          boxSizing: "border-box",
-          position: "sticky",
-        },
+          boxSizing: 'border-box',
+          position: 'sticky'
+        }
       }}
       variant="persistent"
     >
       <DrawerHeader>
         <Box
           sx={{
-            flexDirection: "row",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
+            justifyContent: 'center',
+            alignItems: 'center'
           }}
         >
           <Link to="/">
-            <Avatar
-              variant="square"
-              alt="logo"
-              src={Logo}
-              sx={{ minWidth: 60, mr: 5, ml: 3 }}
-            />
+            <LogoIcon isLight={isLight} />
           </Link>
-          <Typography variant="logo" component="div">
-            Value Plus
-          </Typography>
         </Box>
       </DrawerHeader>
       <Divider />
 
       <Box
         sx={{
-          flexDirection: "column",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          minHeight: 100,
+          flexDirection: 'column',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          minHeight: 100
         }}
       >
         <Avatar
@@ -187,21 +175,21 @@ const SidebarComponent = (prop) => {
           variant="logo"
           component="div"
           sx={{
-            display: "block",
+            display: 'block',
             marginTop: 3,
-            color: (theme) => theme.palette.primary.dark,
+            color: (theme) => theme.palette.primary.dark
           }}
         >
           Ahmed Badea
-        </Typography>{" "}
+        </Typography>{' '}
         <Typography
           variant="subtitle2"
           component="div"
           sx={{
-            display: "block",
+            display: 'block',
 
             color: (theme) => theme.palette.primary.dark,
-            fontWeight: 100,
+            fontWeight: 100
           }}
         >
           Senior .Net Developer
@@ -210,8 +198,8 @@ const SidebarComponent = (prop) => {
 
       <List
         sx={{
-          width: "100%",
-          maxWidth: 360,
+          width: '100%',
+          maxWidth: 360
         }}
         component="nav"
       >
@@ -223,44 +211,39 @@ const SidebarComponent = (prop) => {
         <ListItem key={1} disablePadding>
           <Link to="dashboard">
             <ListItemButton>
-              <ListItemIcon>{getIcon("Dashboard")}</ListItemIcon>
+              <ListItemIcon>{getIcon('Dashboard')}</ListItemIcon>
               <ListItemText
                 disableTypography
-                primaryTypographyProps={{ variant: "mediumText" }}
-                primary={"Dashboard"}
+                primaryTypographyProps={{ variant: 'mediumText' }}
+                primary={'Dashboard'}
               />
             </ListItemButton>
           </Link>
         </ListItem>
         <ListItem key={2} disablePadding>
           <ListItemButton onClick={handleOrToggle}>
-            <ListItemIcon>{getIcon("Organization")}</ListItemIcon>
+            <ListItemIcon>{getIcon('Organization')}</ListItemIcon>
             <ListItemText
               disableTypography
-              primaryTypographyProps={{ variant: "mediumText" }}
+              primaryTypographyProps={{ variant: 'mediumText' }}
               primary="Organization"
             />
             <ExpandLess
               sx={[
                 {
-                  transform: "rotate(90deg)",
-                  transition: "transform .4s ease-in-out",
+                  transform: 'rotate(90deg)',
+                  transition: 'transform .4s ease-in-out'
                 },
-                isOpenOr && { transform: "rotate(180deg)" },
+                isOpenOr && { transform: 'rotate(180deg)' }
               ]}
             />
           </ListItemButton>
-          <Collapse
-            in={isOpenOr}
-            timeout="auto"
-            unmountOnExit
-            orientation="vertical"
-          >
+          <Collapse in={isOpenOr} timeout="auto" unmountOnExit orientation="vertical">
             <List component="div">
               <ListItem key={0} disablePadding>
                 <Link to={`organization/company`}>
                   <ListItemButton sx={{ pl: 4 }} onClick={handleGLMFToggle}>
-                    <ListItemIcon>{getIcon("Companies")}</ListItemIcon>
+                    <ListItemIcon>{getIcon('Companies')}</ListItemIcon>
                     <ListItemText primary="Companies" />
                   </ListItemButton>
                 </Link>
@@ -268,7 +251,7 @@ const SidebarComponent = (prop) => {
               <ListItem key={1} disablePadding>
                 <Link to={`organization/branch`}>
                   <ListItemButton sx={{ pl: 4 }} onClick={handleGLMFToggle}>
-                    <ListItemIcon>{getIcon("Branches")}</ListItemIcon>
+                    <ListItemIcon>{getIcon('Branches')}</ListItemIcon>
                     <ListItemText primary="Branches" />
                   </ListItemButton>
                 </Link>
@@ -278,78 +261,60 @@ const SidebarComponent = (prop) => {
         </ListItem>
         <ListItem key={3} disablePadding>
           <ListItemButton onClick={handleGLToggle}>
-            <ListItemIcon>{getIcon("General Ledger")}</ListItemIcon>
+            <ListItemIcon>{getIcon('General Ledger')}</ListItemIcon>
             <ListItemText
               disableTypography
-              primaryTypographyProps={{ variant: "mediumText" }}
+              primaryTypographyProps={{ variant: 'mediumText' }}
               primary="General Ledger"
             />
             <ExpandLess
               sx={[
                 {
-                  transform: "rotate(90deg)",
-                  transition: "transform .4s ease-in-out",
+                  transform: 'rotate(90deg)',
+                  transition: 'transform .4s ease-in-out'
                 },
-                isOpenGL && { transform: "rotate(180deg)" },
+                isOpenGL && { transform: 'rotate(180deg)' }
               ]}
             />
           </ListItemButton>
-          <Collapse
-            in={isOpenGL}
-            timeout="auto"
-            unmountOnExit
-            orientation="vertical"
-          >
+          <Collapse in={isOpenGL} timeout="auto" unmountOnExit orientation="vertical">
             <List component="div" disablePadding>
               <ListItem key={0} disablePadding>
                 <ListItemButton sx={{ pl: 4 }} onClick={handleGLMFToggle}>
-                  <ListItemIcon>
-                    {getIcon("General Ledger Master Files")}
-                  </ListItemIcon>
+                  <ListItemIcon>{getIcon('General Ledger Master Files')}</ListItemIcon>
                   <ListItemText primary="General Ledger Master Files" />
                   <ExpandLess
                     sx={[
                       {
-                        transform: "rotate(90deg)",
-                        transition: "transform .4s ease-in-out",
+                        transform: 'rotate(90deg)',
+                        transition: 'transform .4s ease-in-out'
                       },
-                      isOpenGLMF && { transform: "rotate(180deg)" },
+                      isOpenGLMF && { transform: 'rotate(180deg)' }
                     ]}
                   />
                 </ListItemButton>
-                <Collapse
-                  in={isOpenGLMF}
-                  timeout="auto"
-                  unmountOnExit
-                  orientation="vertical"
-                >
+                <Collapse in={isOpenGLMF} timeout="auto" unmountOnExit orientation="vertical">
                   <List component="div" disablePadding>
                     <ListItem key={0} disablePadding>
                       <Link to={`general-ledger/master-files/chart`}>
                         <ListItemButton sx={{ pl: 6 }}>
-                          <ListItemIcon>
-                            {getIcon("General Ledger Chart")}
-                          </ListItemIcon>
+                          <ListItemIcon>{getIcon('General Ledger Chart')}</ListItemIcon>
                           <ListItemText primary="General Ledger Chart" />
                         </ListItemButton>
                       </Link>
                     </ListItem>
-                    <ListItem key={0} disablePadding>
-                      <Link
-                        to={`general-ledger/master-files/consolidated-chart`}
-                      >
+                    <ListItem key={1} disablePadding>
+                      <Link to={`general-ledger/master-files/consolidated-chart`}>
                         <ListItemButton sx={{ pl: 6 }}>
-                          <ListItemIcon>
-                            {getIcon("General Consolidated Chart")}
-                          </ListItemIcon>
+                          <ListItemIcon>{getIcon('General Consolidated Chart')}</ListItemIcon>
                           <ListItemText primary="General Consolidated Chart" />
                         </ListItemButton>
                       </Link>
                     </ListItem>
-                    <ListItem key={0} disablePadding>
+                    <ListItem key={2} disablePadding>
                       <Link to={`general-ledger/master-files/cost-center`}>
                         <ListItemButton sx={{ pl: 6 }} onClick={handleCSToggle}>
-                          <ListItemIcon>{getIcon("Cost Centers")}</ListItemIcon>
+                          <ListItemIcon>{getIcon('Cost Centers')}</ListItemIcon>
                           <ListItemText primary="Cost Centers" />
                           {/* <ExpandLess
                           sx={[
@@ -392,10 +357,10 @@ const SidebarComponent = (prop) => {
                         </List>
                       </Collapse> */}
                     </ListItem>
-                    <ListItem key={0} disablePadding>
+                    <ListItem key={3} disablePadding>
                       <Link to="general-ledger/master-files/project">
                         <ListItemButton sx={{ pl: 6 }}>
-                          <ListItemIcon>{getIcon("Projects")}</ListItemIcon>
+                          <ListItemIcon>{getIcon('Projects')}</ListItemIcon>
                           <ListItemText primary="Projects" />
                         </ListItemButton>
                       </Link>
@@ -403,47 +368,34 @@ const SidebarComponent = (prop) => {
                   </List>
                 </Collapse>
               </ListItem>
-              <ListItem key={0} disablePadding>
+              <ListItem key={1} disablePadding>
                 <ListItemButton sx={{ pl: 4 }} onClick={handleGLTToggle}>
-                  <ListItemIcon>
-                    {getIcon("General Ledger Transactions")}
-                  </ListItemIcon>
+                  <ListItemIcon>{getIcon('General Ledger Transactions')}</ListItemIcon>
                   <ListItemText primary="General Ledger Transactions" />
                   <ExpandLess
                     sx={[
                       {
-                        transform: "rotate(90deg)",
-                        transition: "transform .4s ease-in-out",
+                        transform: 'rotate(90deg)',
+                        transition: 'transform .4s ease-in-out'
                       },
-                      isOpenGLT && { transform: "rotate(180deg)" },
+                      isOpenGLT && { transform: 'rotate(180deg)' }
                     ]}
                   />
                 </ListItemButton>
-                <Collapse
-                  in={isOpenGLT}
-                  timeout="auto"
-                  unmountOnExit
-                  orientation="vertical"
-                >
+                <Collapse in={isOpenGLT} timeout="auto" unmountOnExit orientation="vertical">
                   <List component="div" disablePadding>
                     <ListItem key={0} disablePadding>
                       <Link to={`general-ledger/transactions/journal-entries`}>
                         <ListItemButton sx={{ pl: 6 }}>
-                          <ListItemIcon>
-                            {getIcon("Journal Entries")}
-                          </ListItemIcon>
+                          <ListItemIcon>{getIcon('Journal Entries')}</ListItemIcon>
                           <ListItemText primary="Journal Entries" />
                         </ListItemButton>
                       </Link>
                     </ListItem>
-                    <ListItem key={0} disablePadding>
-                      <Link
-                        to={`general-ledger/transactions/pre-payment-and-accrual-entry`}
-                      >
+                    <ListItem key={1} disablePadding>
+                      <Link to={`general-ledger/transactions/pre-payment-and-accrual-entry`}>
                         <ListItemButton sx={{ pl: 6 }}>
-                          <ListItemIcon>
-                            {getIcon("Pre Payment and Accrual Entry")}
-                          </ListItemIcon>
+                          <ListItemIcon>{getIcon('Pre Payment and Accrual Entry')}</ListItemIcon>
                           <ListItemText primary="Pre Payment and Accrual Entry" />
                         </ListItemButton>
                       </Link>
@@ -451,37 +403,26 @@ const SidebarComponent = (prop) => {
                   </List>
                 </Collapse>
               </ListItem>
-              <ListItem key={0} disablePadding>
+              <ListItem key={2} disablePadding>
                 <ListItemButton sx={{ pl: 4 }} onClick={handleGLQToggle}>
-                  <ListItemIcon>
-                    {getIcon("General Ledger Queries")}
-                  </ListItemIcon>
+                  <ListItemIcon>{getIcon('General Ledger Queries')}</ListItemIcon>
                   <ListItemText primary="General Ledger Queries" />
                   <ExpandLess
                     sx={[
                       {
-                        transform: "rotate(90deg)",
-                        transition: "transform .4s ease-in-out",
+                        transform: 'rotate(90deg)',
+                        transition: 'transform .4s ease-in-out'
                       },
-                      isOpenGLQ && { transform: "rotate(180deg)" },
+                      isOpenGLQ && { transform: 'rotate(180deg)' }
                     ]}
                   />
                 </ListItemButton>
-                <Collapse
-                  in={isOpenGLQ}
-                  timeout="auto"
-                  unmountOnExit
-                  orientation="vertical"
-                >
+                <Collapse in={isOpenGLQ} timeout="auto" unmountOnExit orientation="vertical">
                   <List component="div" disablePadding>
                     <ListItem key={0} disablePadding>
-                      <Link
-                        to={`general-ledger/queries/accounts-details-queries`}
-                      >
+                      <Link to={`general-ledger/queries/accounts-details-queries`}>
                         <ListItemButton sx={{ pl: 6 }}>
-                          <ListItemIcon>
-                            {getIcon("Accounts Details Queries")}
-                          </ListItemIcon>
+                          <ListItemIcon>{getIcon('Accounts Details Queries')}</ListItemIcon>
                           <ListItemText primary="Accounts Details Queries" />
                         </ListItemButton>
                       </Link>
@@ -489,12 +430,10 @@ const SidebarComponent = (prop) => {
                   </List>
                 </Collapse>
               </ListItem>
-              <ListItem key={0} disablePadding>
+              <ListItem key={3} disablePadding>
                 <Link to={`general-ledger/reports`}>
                   <ListItemButton sx={{ pl: 4 }}>
-                    <ListItemIcon>
-                      {getIcon("General Ledger Reports")}
-                    </ListItemIcon>
+                    <ListItemIcon>{getIcon('General Ledger Reports')}</ListItemIcon>
                     <ListItemText primary="General Ledger Reports" />
                   </ListItemButton>
                 </Link>

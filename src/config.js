@@ -1,6 +1,6 @@
 const config = {
   fontFamily: `'Roboto', sans-serif`,
-  borderRadius: 12,
+  borderRadius: 12
 };
 
 export default config;

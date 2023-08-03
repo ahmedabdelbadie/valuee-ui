@@ -1,16 +1,16 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const config = createSlice({
-  name: "config",
+  name: 'config',
   initialState: {
-    lang: "en",
+    lang: 'en',
     isLight: true,
     fontFamily: `'Roboto', sans-serif`,
-    borderRadius: 12,
+    borderRadius: 12
   },
   reducers: {
     changeLang: (state, action) => {
-      state.lang = action.payload === "ar" ? "ar" : "en";
+      state.lang = action.payload === 'ar' ? 'ar' : 'en';
     },
     changeTheme: (state, action) => {
       state.isLight = action.payload;
@@ -20,11 +20,10 @@ const config = createSlice({
     },
     changeBorderRadius: (state, action) => {
       state.borderRadius = action.payload;
-    },
-  },
+    }
+  }
 });
 
-export const { changeLang, changeTheme, changeFontFamily, changeBorderRadius } =
-  config.actions;
+export const { changeLang, changeTheme, changeFontFamily, changeBorderRadius } = config.actions;
 
 export default config.reducer;

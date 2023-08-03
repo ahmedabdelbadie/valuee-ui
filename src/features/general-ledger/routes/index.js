@@ -1,14 +1,14 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes } from 'react-router-dom';
 
-import { GeneralConsolidatedChart } from "../pages/GeneralConsolidatedChart";
-import { GeneralLedgerChart } from "../pages/GeneralLedgerChart";
-import { CostCenter } from "../pages/CostCenter";
-import { Reports } from "../pages/Reports";
-import { Project } from "../pages/Project";
-import { Default } from "../pages/GeneralLedgerDefault";
-import { JournalEntries } from "../pages/JournalEntries";
-import { PrePayment } from "../pages/PrePayment";
-import { AccountsDetails } from "../pages/AccountsDetails";
+import { GeneralConsolidatedChart } from '../pages/GeneralConsolidatedChart';
+import { GeneralLedgerChart } from '../pages/GeneralLedgerChart';
+import { CostCenter } from '../pages/CostCenter';
+import { Reports } from '../pages/Reports';
+import { Project } from '../pages/Project';
+import { Default } from '../pages/GeneralLedgerDefault';
+import { JournalEntries } from '../pages/JournalEntries';
+import { PrePayment } from '../pages/PrePayment';
+import { AccountsDetails } from '../pages/AccountsDetails';
 const GeneralLedgerMasterFilesRoutes = () => {
   return (
     <Routes>
@@ -39,14 +39,8 @@ export const GLRoutes = () => {
   return (
     <Routes>
       <Route path="/" index element={<Default />} />
-      <Route
-        path="/master-files/*"
-        element={<GeneralLedgerMasterFilesRoutes />}
-      />
-      <Route
-        path="/transactions/*"
-        element={<GeneralLedgerTransactionsRoutes />}
-      />
+      <Route path="/master-files/*" element={<GeneralLedgerMasterFilesRoutes />} />
+      <Route path="/transactions/*" element={<GeneralLedgerTransactionsRoutes />} />
       <Route path="/queries/*" element={<QueriesRoutes />} />
       <Route path="reports" element={<Reports />} />
     </Routes>

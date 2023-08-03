@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 
 export function lazyImport(factory, name) {
   const x = Object.create({
@@ -6,11 +6,8 @@ export function lazyImport(factory, name) {
       factory().then((module) => {
         return { default: module[name] };
       })
-    ),
+    )
   });
 
   return x;
 }
-
-// Usage
-// const { Home } = lazyImport(() => import("./Home"), "Home");

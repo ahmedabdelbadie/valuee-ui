@@ -1,5 +1,5 @@
-import { axios } from "../../../lib/axios";
+import { axios } from '../../../lib/axios';
 
-export const getUser = () => {
-  return axios.get("/auth/me");
+export const getUser = (userId) => {
+  return axios.get('/auth/me');
 };
