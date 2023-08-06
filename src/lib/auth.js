@@ -1,11 +1,16 @@
 import { configureAuth } from 'react-query-auth';
 
 import { loginWithEmailAndPassword } from '../features/auth';
+import { getUser } from '../features/auth';
 import storage from '../utils/storage';
 
 async function handleUserResponse(responseData) {
   //TODO Get Id And save it on local storage
   const { data } = responseData;
+  // storage.setToken({ token: data });
+  // const user = await getUser();
+  // storage.setToken({ token: storage.getToken(), user: user });
+
   const userId = null;
   storage.setToken({ token: data, userId: userId });
   return { userName: 'ahmed' }; //await getUser({ userId: userId });

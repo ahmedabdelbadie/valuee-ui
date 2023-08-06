@@ -7,8 +7,8 @@
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@material-ui/core": "^4.12.4",
-    "@mui/icons-material": "^5.14.0",
-    "@mui/material": "^5.14.0",
+    "@mui/icons-material": "^5.14.3",
+    "@mui/material": "^5.14.3",
     "@mui/x-data-grid": "^6.10.1",
     "@mui/x-date-pickers": "^6.10.1",
     "@reduxjs/toolkit": "^1.9.5",
@@ -23,6 +23,7 @@
     "chartjs-chart-geo": "^4.2.4",
     "dayjs": "^1.11.9",
     "jsconfig.json": "^2.3.3",
+    "material-react-table": "^1.14.0",
     "npm": "^9.8.1",
     "perfect-scrollbar": "^1.5.5",
     "react": "^18.2.0",
@@ -80,5 +81,4 @@
   "repository": "https://github.com/ahmedabdelbadie/valuee-ui.git",
   "author": "ahmedabdelbadie <eng.ahmed9466@gmail.com>",
   "license": "MIT"
-  
 }
